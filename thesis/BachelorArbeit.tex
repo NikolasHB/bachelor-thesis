@@ -1,0 +1,326 @@
+% allgem. Dokumentenformat
+\documentclass[a4paper,12pt,headsepline]{scrartcl}
+\input{latex_einstellungen/variablen}
+
+% weitere Pakete
+% Grafiken aus PNG Dateien einbinden
+\usepackage{graphicx}
+
+% Text neben Grafik
+\usepackage{wrapfig}
+
+% Text neben Grafik
+\usepackage{censor}
+
+% Deutsche Sonderzeichen benutzen 
+\usepackage{ngerman}
+
+% deutsche Silbentrennung
+\usepackage[ngerman]{babel}
+
+% Eurozeichen einbinden
+\usepackage[right]{eurosym}
+
+% Umlaute unter UTF8 nutzen
+\usepackage[utf8]{inputenc}
+
+% Zeichenencoding
+\usepackage[T1]{fontenc}
+
+\usepackage{lmodern}
+\usepackage{fix-cm}
+
+% floatende Bilder ermöglichen
+%\usepackage{floatflt}
+
+% mehrseitige Tabellen ermöglichen
+\usepackage{longtable}
+
+% Unterstützung für Schriftarten
+%\newcommand{\changefont}[3]{ 
+%\fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont}
+
+% Packet für Seitenrandabständex und Einstellung für Seitenränder
+\usepackage{geometry}
+\geometry{left=3.5cm, right=2cm, top=2.5cm, bottom=2cm}
+
+% Paket für Boxen im Text
+\usepackage{fancybox}
+
+% bricht lange URLs "schoen" um
+\usepackage[hyphens,obeyspaces,spaces]{url}
+
+% Paket für Textfarben
+\usepackage{color}
+
+% Mathematische Symbole importieren
+\usepackage{amssymb}
+
+% auf jeder Seite eine Überschrift (alt, zentriert)
+%\pagestyle{headings}
+
+% erzeugt Inhaltsverzeichnis mit Querverweisen zu den Kapiteln (PDF Version)
+\usepackage[bookmarksnumbered,pdftitle={\titleDocument},hyperfootnotes=false]{hyperref} 
+%\hypersetup{colorlinks, citecolor=red, linkcolor=blue, urlcolor=black}
+%\hypersetup{colorlinks, citecolor=black, linkcolor= black, urlcolor=black}
+
+% neue Kopfzeilen mit fancypaket
+\usepackage{fancyhdr} %Paket laden
+\pagestyle{fancy} %eigener Seitenstil
+\fancyhf{} %alle Kopf- und Fußzeilenfelder bereinigen
+\fancyhead[L]{\nouppercase{\leftmark}} %Kopfzeile links
+\fancyhead[C]{} %zentrierte Kopfzeile
+\fancyhead[R]{\thepage} %Kopfzeile rechts
+\renewcommand{\headrulewidth}{0.4pt} %obere Trennlinie
+%\fancyfoot[C]{\thepage} %Seitennummer
+%\renewcommand{\footrulewidth}{0.4pt} %untere Trennlinie
+
+% für Tabellen
+\usepackage{array}
+
+% Runde Klammern für Zitate
+%\usepackage[numbers,round]{natbib}
+
+% Festlegung Art der Zitierung - Havardmethode: Abkuerzung Autor + Jahr
+\bibliographystyle{alphadin}
+
+% Schaltet den zusätzlichen Zwischenraum ab, den LaTeX normalerweise nach einem Satzzeichen einfügt.
+\frenchspacing
+
+% Paket für Zeilenabstand
+\usepackage{setspace}
+
+% für Bildbezeichner
+\usepackage{capt-of}
+
+% für Stichwortverzeichnis
+\usepackage{makeidx}
+
+% für Listings
+% \usepackage{listings}
+% \lstset{numbers=left, numberstyle=\tiny, numbersep=5pt, keywordstyle=\color{black}\bfseries, stringstyle=\ttfamily,showstringspaces=false,basicstyle=\footnotesize,captionpos=b}
+% \lstset{language=java}
+
+\usepackage{listings}
+\usepackage{color}
+
+% Blocksatz?
+\usepackage[none]{hyphenat}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+	backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+	basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	commentstyle=\color{mygreen},    % comment style
+	deletekeywords={...},            % if you want to delete keywords from the given language
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	frame=single,	                   % adds a frame around the code
+	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\color{blue},       % keyword style
+	language=Octave,                 % the language of the code
+	otherkeywords={*,...},           % if you want to add more keywords to the set
+	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+	numbersep=5pt,                   % how far the line-numbers are from the code
+	numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+	rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,          % underline spaces within strings only
+	showtabs=false,                  % show tabs within strings adding particular underscores
+	stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{mymauve},     % string literal style
+	tabsize=2,	                   % sets default tabsize to 2 spaces
+	title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+% Indexerstellung
+\makeindex
+
+% Abkürzungsverzeichnis
+\usepackage[german]{nomencl}
+\let\abbrev\nomenclature
+
+% Abkürzungsverzeichnis LiveTex Version
+\renewcommand{\nomname}{Abkürzungsverzeichnis}
+\setlength{\nomlabelwidth}{0.01\hsize}
+\renewcommand{\nomlabel}[1]{#1 \dotfill}
+\setlength{\nomitemsep}{-\parsep}
+\makenomenclature
+%\makeglossary
+
+% Abkürzungsverzeichnis TeTEX Version
+%\usepackage[german]{nomencl}
+%\makenomenclature
+%%\makeglossary
+%\renewcommand{\nomname}{Abkürzungsverzeichnis}
+%\setlength{\nomlabelwidth}{.25\hsize}
+%\renewcommand{\nomlabel}[1]{#1 \dotfill}
+%\setlength{\nomitemsep}{-\parsep}
+
+% Disable single lines at the start of a paragraph (Schusterjungen)
+\clubpenalty = 10000
+% Disable single lines at the end of a paragraph (Hurenkinder)
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
+
+\begin{document}
+% hier werden die Trennvorschläge inkludiert
+\input{latex_einstellungen/trennung}
+
+% Blocksatz Einstellung
+\hyphenpenalty=5000
+\exhyphenpenalty=5000
+\sloppy
+
+%Schriftart Helvetica
+%\changefont{phv}{m}{n}
+
+% Leere Seite am Anfang
+\newpage
+\thispagestyle{empty} % erzeugt Seite ohne Kopf- / Fusszeile
+\section*{ }
+
+% Titelseite %
+\include{latex_einstellungen/deckblatt}
+
+% römische Numerierung
+%\pagenumbering{arabic}
+
+% 1.5 facher Zeilenabstand
+\onehalfspacing
+
+% Sperrvermerk
+\input{sperrvermerk}
+
+% Einleitung / Abstract
+\include{abstract}
+
+% einfacher Zeilenabstand
+\singlespacing
+
+% Inhaltsverzeichnis anzeigen
+\newpage
+\tableofcontents
+
+% das Abbildungsverzeichnis
+% Abbildungsverzeichnis soll im Inhaltsverzeichnis auftauchen
+\addcontentsline{toc}{section}{Abbildungsverzeichnis}
+% Abbildungsverzeichnis endgueltig anzeigen
+\listoffigures
+
+% das Tabellenverzeichnis
+% Abbildungsverzeichnis soll im Inhaltsverzeichnis auftauchen
+\addcontentsline{toc}{section}{Tabellenverzeichnis}
+% \fancyhead[L]{Abbildungsverzeichnis / Abkürzungsverzeichnis} %Kopfzeile links
+% Abbildungsverzeichnis endgueltig anzeigen
+\listoftables
+
+%% WORKAROUND für Listings
+%\makeatletter% --> De-TeX-FAQ
+%\renewcommand*{\lstlistoflistings}{%
+%  \begingroup
+%    \if@twocolumn
+%      \@restonecoltrue\onecolumn
+%    \else
+%      \@restonecolfalse
+%    \fi
+%    \lol@heading
+%    \setlength{\parskip}{\z@}%
+%    \setlength{\parindent}{\z@}%
+%    \setlength{\parfillskip}{\z@ \@plus 1fil}%
+%    \@starttoc{lol}%
+%    \if@restonecol\twocolumn\fi
+%  \endgroup
+%}
+%\makeatother% --> \makeatletter
+% das Listingverzeichnis
+\newpage
+% Listingverzeichnis soll im Inhaltsverzeichnis auftauchen
+\addcontentsline{toc}{section}{Listingverzeichnis}
+%\fancyhead[L]{Abbildungs- / Tabellen- / Listingverzeichnis} %Kopfzeile links
+\renewcommand{\lstlistlistingname}{Listingverzeichnis}
+\lstlistoflistings
+%%%%
+
+% das Abkürzungsverzeichnis
+%\newpage
+% Abkürzungsverzeichnis soll im Inhaltsverzeichnis auftauchen
+\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+% das Abkürzungsverzeichnis entgültige Ausgeben
+\fancyhead[L]{Abkürzungsverzeichnis} %Kopfzeile links
+\input{latex_einstellungen/abkuezungen/abkuerzungen}
+\printnomenclature
+
+% Definiert Stegbreite bei zweispaltigem Layout
+\setlength{\columnsep}{25pt}
+
+%%%%%%% EINLEITUNG %%%%%%%%%%%%
+%\twocolumn
+\newpage
+\fancyhead[L]{\nouppercase{\leftmark}} %Kopfzeile links
+
+% 1,5 facher Zeilenabstand
+\twospacing
+
+% einzelne Kapitel
+\input{1_einleitung}
+
+\newpage
+\input{2_grundlagen}
+
+\newpage
+\input{3_system_info}
+
+\newpage
+\input{4_rahmenbedingungen}
+
+\newpage
+\input{5_durchfuehrung}
+
+\newpage
+\input{6_ergebnisse}
+
+\newpage
+\input{7_abschluss}
+
+\onecolumn
+% einfacher Zeilenabstand
+\singlespacing
+% Literaturliste soll im Inhaltsverzeichnis auftauchen
+\newpage
+\addcontentsline{toc}{section}{Literaturverzeichnis}
+% Literaturverzeichnis anzeigen
+\renewcommand\refname{Literaturverzeichnis}
+\bibliography{BachelorArbeit}
+
+%% Index soll Stichwortverzeichnis heissen
+% \newpage
+% % Stichwortverzeichnis soll im Inhaltsverzeichnis auftauchen
+% \addcontentsline{toc}{section}{Stichwortverzeichnis}
+% \renewcommand{\indexname}{Stichwortverzeichnis}
+% % Stichwortverzeichnis endgueltig anzeigen
+% \printindex
+
+\onehalfspacing
+% evtl. Anhang
+\newpage
+\addcontentsline{toc}{section}{Anhang}
+\fancyhead[L]{Anhang} %Kopfzeile links
+\input{anhang/anhang}
+
+% Eidesstattliche Erklärung
+\addcontentsline{toc}{section}{Eidesstattliche Erklärung}
+\include{erklaerung}
+
+% leere Abschlussseite
+\newpage
+\thispagestyle{empty} % erzeugt Seite ohne Kopf- / Fusszeile
+\section*{ }
+
+\end{document}
