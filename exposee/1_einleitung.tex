@@ -1,18 +1,18 @@
 \section{Hintergrund}\label{einleitung}
-AngularJS ist ein clientseitiges JavaScript-Framework zur Realisierung von Single-Page-Webapplikationen. Es wurde von \textit{Google Inc.} ins Leben und ist seit 2009 ein Open-Source-Projekt. AngularJS ist weitverbreitet und wird Statistiken \footnote{\url{https://trends.builtwith.com/javascript/Angular-JS}} zufolge in über 450.000 Webanwendungen, davon bekannten wie \textit{Gmail} \footnote{\url{www.google.com/gmail}}, \textit{PayPal} \footnote{\url{www.paypal.com}} oder \textit{YouTube for PS3}, eingesetzt.
+AngularJS ist ein clientseitiges JavaScript-Framework zur Realisierung von Single-Page-Webapplikationen. Es wurde von \textit{Google Inc.} ins Leben gerufen und ist seit 2009 ein Open-Source-Projekt. AngularJS ist weitverbreitet und wird Statistiken \footnote{\url{https://trends.builtwith.com/javascript/Angular-JS}} zufolge in über 450.000 Webanwendungen, davon bekannten wie \textit{Gmail} \footnote{\url{www.google.com/gmail}}, \textit{PayPal} \footnote{\url{www.paypal.com}} oder \textit{YouTube for PS3}, eingesetzt.
 
-Im September 2006 wurde Version 2 von Angular veröffentlicht, die mit Version 1 nicht rückwärtskompatibel ist. Zur besseren Unterscheidbarkeit haben sich seitdem folgende Begrifflichkeiten durchgesetzt: \textit{AngularJS} für Version 1, \textit{Angular2} für Version 2, \textit{Angular} als Sammelbegriff für beide Versionen.
+Im September 2016 wurde Version 2 von Angular veröffentlicht, die mit Version 1 nicht rückwärtskompatibel ist. Zur besseren Unterscheidbarkeit haben sich seitdem folgende Begrifflichkeiten durchgesetzt: \textit{AngularJS} für Version 1, \textit{Angular2} für Version 2, \textit{Angular} als Sammelbegriff für beide Versionen.
 
-Im Commerzbank-Konzern wurde durch das regulatorisch geprägte und dadurch träge IT-Umfeld bei Webanwendungen bisher auf klassische serverseitige Technologien gesetzt. Erst in der jüngeren Vergangenheit wird in vereinzelten Projekten auf AngularJS als technologische Basis gesetzt. Automatisierte Entwicklertests in JavaScript werden hierbei meist stiefmütterlich behandelt; die Anwendungen stattdessen per Hand im Browser getestet.
+Im Commerzbank-Konzern wurde durch das aus Sicherheitsgründen regulatorisch geprägte und dadurch träge IT-Umfeld bei Webanwendungen bisher auf klassische serverseitige Technologien gesetzt. Erst in der jüngeren Vergangenheit wird in vereinzelten Projekten auf AngularJS als technologische Basis gesetzt. Automatisierte Entwicklertests in JavaScript werden hierbei meist stiefmütterlich behandelt; die Anwendungen stattdessen per Hand im Browser getestet, wodurch sich eine geringe Testabdeckung ergibt.
 
 \section{Zielsetzung}
-Ziel ist es, die Möglichkeiten von automatisierten Tests - Komponenten- sowie End-To-End-Tests - für AngularJS-Webanwendungen zu untersuchen. Es soll aus den verschiedensten existierenden Test-Frameworks und Tools unter Berücksichtigung der Vorgaben und Eigenheiten innerhalb der Commerzbank sowie der Benutzerfreundlichkeit eine Auswahl getroffen werden. Auch soll überprüft werden, ob automatisierte Tests auf die Einhaltung von Programmierrichtlinien möglich und sinnvoll sind.
+Ziel ist es, die Möglichkeiten von automatisierten Tests - Komponenten- sowie End-To-End-Tests - für AngularJS-Webanwendungen zu untersuchen. Es soll aus den verschiedensten existierenden Test-Frameworks und Tools unter Berücksichtigung der Vorgaben und Eigenheiten innerhalb der Commerzbank sowie der Benutzerfreundlichkeit eine Auswahl getroffen werden. Auch soll überprüft werden, ob es möglich und sinnvoll ist die Einhaltung von Programmierrichtlinien automatisiert zu testen.
 
-Aufgrund der bisherigen Verbreitung innerhalb der Commerzbank wird die Auswahl für AngularJS getroffen. Jedoch soll untersucht werden, inwiefern sich durch den Einsatz von Angular2 Verbesserungen im Hinblick auf Testbarkeit ergeben.
+Aufgrund der bisherigen Verbreitung innerhalb der Commerzbank wird die Auswahl für AngularJS getroffen. Jedoch soll als Ausblick untersucht werden, inwiefern sich durch den Einsatz von Angular2 Verbesserungen im Hinblick auf Testbarkeit ergeben würden, und somit eine Verwendung von Angular2 empfehlenswert wäre.
 
 
 \section{Vorgehen}
-In der Thesis sollen in einer Recherche verfügbare Testframeworks und -tools gesucht und diese mittels Programmdokumentationen und weiteren Quellen erkundet werden. Die gefundenen Ergebnisse sollen kategorisiert und anhand von vorher festzulegenden Kriterien in einer Entscheidungsmatrix miteinander verglichen werden. Erwartetes Ergebnis ist eine Auswahl von Software, mittels welcher die Kriterien abgedeckt und somit automatisierte Test bestmöglich realisierbar sind. 
+In der Thesis sollen in einer Recherche verfügbare Testframeworks und -tools gesucht und diese mittels Programmdokumentationen und weiteren Quellen erkundet werden. Die gefundenen Ergebnisse sollen kategorisiert und anhand von vorher festzulegenden Kriterien in einer Entscheidungsmatrix miteinander verglichen werden. Erwartetes Ergebnis ist eine Auswahl von Software, mittels welcher die Kriterien abgedeckt und somit automatisierte Tests bestmöglich realisierbar sind. 
 
 Mithilfe der getroffenen Auswahl sollen anschließend für eine exemplarisch gewählte, produktiv genutzte AngularJS-Webanwendung Komponenten- sowie End-To-End-Tests realisiert werden. Dies dient der Validierung der ausgewählten Testframeworks im Hinblick auf Realisierbarkeit, Zusammenspiel und einfache Anwendbarkeit.
 
@@ -21,7 +21,7 @@ Optional soll die Möglichkeit der Einbettung dieser automatisierten Tests in be
 Die Arbeit kann in folgende Teile gegliedert werden:
 \begin{itemize}
 	\item Erläuterung des Hintergrunds, Einführung und Erläuterung von Angular sowie automatisierten Tests
-	\item Erstellen einer Liste von verfügbaren Frameworks und Tools für Testautomatisierung in JavaScript
+	\item Erstellen einer Liste der verbreitetsten, verfügbaren Frameworks und Tools für Testautomatisierung in JavaScript ohne Anspruch auf Vollständigkeit
 	\begin{itemize}
 		\item Untersuchung der Softwaredokumentationen
 		\item Untersuchung von Internetquellen, z.\,B. Erfahrungsberichten, im Hinblick auf die gefundene Software
@@ -30,5 +30,5 @@ Die Arbeit kann in folgende Teile gegliedert werden:
 	\item Festlegung von Kriterien
 	\item Vergleich und Auswahl der gefundenen Software in einer Entscheidungsmatrix mit den festgelegten Kriterien
 	\item Evaluierung mittels Realisierung von Tests mit der getroffenen Softwareauswahl
-	\item Vergleich von AngularJS und Angular2 im Hinblick auf Testbarkeit
+	\item Vergleich von AngularJS und Angular2 im Hinblick auf Testbarkeit anhand von Literatur
 \end{itemize}
