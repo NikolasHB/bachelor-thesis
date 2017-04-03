@@ -13,7 +13,7 @@
 \usepackage{censor}
 
 % Deutsche Sonderzeichen benutzen 
-\usepackage{ngerman}
+%\usepackage{ngerman}
 
 % deutsche Silbentrennung
 \usepackage[ngerman]{babel}
@@ -82,13 +82,18 @@
 %\usepackage[numbers,round]{natbib}
 
 % Festlegung Art der Zitierung - Havardmethode: Abkuerzung Autor + Jahr
-\bibliographystyle{alphadin}
+\usepackage[backend=biber,style=alphabetic]{biblatex}
+\usepackage[babel,german=guillemets]{csquotes}
+%\bibliographystyle{alphadin}
+%\bibliography{BachelorArbeit}
+\addbibresource{BachelorArbeit.bib}
 
 % Schaltet den zusätzlichen Zwischenraum ab, den LaTeX normalerweise nach einem Satzzeichen einfügt.
 \frenchspacing
 
 % Paket für Zeilenabstand
 \usepackage{setspace}
+\usepackage{todonotes}
 
 % für Bildbezeichner
 \usepackage{capt-of}
@@ -196,7 +201,13 @@
 \onehalfspacing
 
 % Sperrvermerk
-\input{sperrvermerk}
+%\input{sperrvermerk}
+\newpage
+\thispagestyle{empty} % erzeugt Seite ohne Kopf- / Fusszeile
+\section*{ }
+\newpage
+\thispagestyle{empty} % erzeugt Seite ohne Kopf- / Fusszeile
+\input{vorwort}
 
 % Einleitung / Abstract
 \include{abstract}
@@ -266,7 +277,7 @@
 \fancyhead[L]{\nouppercase{\leftmark}} %Kopfzeile links
 
 % 1,5 facher Zeilenabstand
-\twospacing
+\onehalfspacing
 
 % einzelne Kapitel
 \input{1_einleitung}
@@ -297,7 +308,7 @@
 \addcontentsline{toc}{section}{Literaturverzeichnis}
 % Literaturverzeichnis anzeigen
 \renewcommand\refname{Literaturverzeichnis}
-\bibliography{BachelorArbeit}
+\printbibliography
 
 %% Index soll Stichwortverzeichnis heissen
 % \newpage
