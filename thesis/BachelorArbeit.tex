@@ -94,6 +94,7 @@
 % Paket für Zeilenabstand
 \usepackage{setspace}
 \usepackage{todonotes}
+\usepackage{float}
 
 % für Bildbezeichner
 \usepackage{capt-of}
@@ -107,6 +108,7 @@
 % \lstset{language=java}
 
 \usepackage{listings}
+%\lstset{numbers=left, numberstyle=\tiny, numbersep=5pt, keywordstyle=\color{black}\bfseries, stringstyle=\ttfamily,showstringspaces=false,basicstyle=\footnotesize,captionpos=b}
 \usepackage{color}
 
 % Blocksatz?
@@ -201,7 +203,7 @@
 \onehalfspacing
 
 % Sperrvermerk
-%\input{sperrvermerk}
+\input{sperrvermerk}
 \newpage
 \thispagestyle{empty} % erzeugt Seite ohne Kopf- / Fusszeile
 \section*{ }
@@ -262,11 +264,11 @@
 % das Abkürzungsverzeichnis
 %\newpage
 % Abkürzungsverzeichnis soll im Inhaltsverzeichnis auftauchen
-\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
+%\addcontentsline{toc}{section}{Abkürzungsverzeichnis}
 % das Abkürzungsverzeichnis entgültige Ausgeben
-\fancyhead[L]{Abkürzungsverzeichnis} %Kopfzeile links
-\input{latex_einstellungen/abkuezungen/abkuerzungen}
-\printnomenclature
+%\fancyhead[L]{Abkürzungsverzeichnis} %Kopfzeile links
+
+%\printnomenclature
 
 % Definiert Stegbreite bei zweispaltigem Layout
 \setlength{\columnsep}{25pt}
@@ -317,6 +319,11 @@
 % \renewcommand{\indexname}{Stichwortverzeichnis}
 % % Stichwortverzeichnis endgueltig anzeigen
 % \printindex
+
+\input{latex_einstellungen/abkuezungen/abkuerzungen}
+\newpage
+\addcontentsline{toc}{section}{Stichwortverzeichnis}
+\printnomenclature
 
 \onehalfspacing
 % evtl. Anhang

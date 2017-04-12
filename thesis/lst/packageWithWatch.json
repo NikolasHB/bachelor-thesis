@@ -1,0 +1,6 @@
+"scripts": {
+  "lint": "jshint **.js",
+  "build:js": "browserify assets/scripts/main.js > dist/main.js",
+  "build": "npm run build:js",
+  "build:watch": "watch 'npm run build && npm run lint' .",
+}
