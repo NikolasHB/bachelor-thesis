@@ -2,7 +2,27 @@
 
  \nomgroup{A}
 
+  \item [{BaFin}]\begingroup Bundesanstalt für Finanzdienstleistungsaufsicht\nomeqref {0}
+		\nompageref{26}
+  \item [{DOM}]\begingroup Document Object Model\nomeqref {0}
+		\nompageref{26}
+  \item [{HTTP}]\begingroup Hypertext Transfer Protocol\nomeqref {0}
+		\nompageref{26}
+  \item [{jQuery}]\begingroup jQuery ist eine JavaScript-Bibliothek für DOM-Manipulation, Event-Handling und Animation.\nomeqref {0}
+		\nompageref{26}
   \item [{JSON}]\begingroup JavaScript Object Notation\nomeqref {0}
-		\nompageref{17}
+		\nompageref{26}
+  \item [{Mock}]\begingroup Ein Platzhalter-Objekt, welches als Attrappe verwendet wird.\nomeqref {0}
+		\nompageref{26}
+  \item [{MVC}]\begingroup Model-View-Controller, ein Entwurfsmuster\nomeqref {0}
+		\nompageref{26}
+  \item [{MVVM}]\begingroup Model-View-ViewModel, ein Entwurfsmuster\nomeqref {0}
+		\nompageref{26}
+  \item [{REST}]\begingroup Representational State Transfer\nomeqref {0}
+		\nompageref{26}
+  \item [{WebSocket}]\begingroup WebSocket ist eine bidirektionale Erweiterung von HTTP.\nomeqref {0}
+		\nompageref{26}
+  \item [{Whitebox-Test}]\begingroup Ein Whitebox-Test ist ein Test, welcher unter Kenntniss der inneren Funktionsweise entwickelt wird.\nomeqref {0}
+		\nompageref{26}
 
 \end{thenomenclature}
