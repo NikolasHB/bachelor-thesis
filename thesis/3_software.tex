@@ -1,0 +1,33 @@
+\section{Softwarerecherche}
+Im folgenden Kapitel werden verschiedene Tools und Frameworks zur Realisierung von automatisierten Tests untersucht. Einen Überblick über zur Verfügung stehende Tools bieten dabei \textcite{unittest-overview} und Weitere.
+
+\subsection{Karma}
+\label{sec:Karma}
+Karma ist ein Test-Runner für die Ausführung von JavaScript-Tests. Er wurde vom AngularJS-Team ins Leben gerufen und wird auf GitHub von einer Open-Source-Gemeinschaft weiterentwickelt.\cite{karma-index} Karma liegt als Paket \texttt{karma} im npm-Repository\cite{karma-faq}.
+
+Karma ermöglicht die Nutzung diverser Testframeworks, wie Jasmine (s. Abschnitt \ref{sec:Jasmine}), Mocha (s. Abschnitt \ref{sec:Mocha}) oder QUnit (s. Abschnitt \ref{sec:QUnit}). Auch Continuous Integration Server wie Jenkins oder Travis werden unterstützt.\cite{karma-faq}
+
+Grundlegend basiert Karma auf einem Client-Server-Prinzip, wobei Karma einen Webserver startet, welcher alle verbundenen Browser fernsteuert und in diesen die Tests ausführt. Ein Browser kann hierbei entweder manuell, also durch Aufruf der vom Karma-Server bereitgestellten URL, oder automatisiert, also indem der Browser durch Karma gestartet wird (vgl. Listing \ref{lst:karma-conf-js}), verbunden werden. In jeder Testumgebung wird der Quelltext mittels IFrame eingebunden, der Test ausgeführt und danach die Ergebnisse an den Server gesendet. Dort werden die Ergebnisse aufgearbeitet präsentiert oder automatisiert von übergeordneten Buildprozessen verarbeitet. Das verwendete Prinzip stammt aus einer Masterthesis \cite{karma-masterThesis}; tieferes Verständnis ist jedoch für die reine Nutzung von Karma nicht erforderlich.\cite{karma-howItWorks}
+
+Für die Konfiguration wird eine JavaScript-Datei, die \texttt{karma.conf.js}, genutzt. Ein Beispiel findet sich in Listing \ref{lst:karma-conf-js}. Mit dieser beispielhaften Konfiguration wird für die Testausführung das Framework Jasmine (s. Abschnitt \ref{sec:Jasmine}) genutzt. Der Parameter \texttt{files} gibt an, welche Dateien von Karma ausgeliefert und beobachtet werden, und somit bei Änderung welcher Dateien die Tests automatisch erneut ausgeführt werden. Außerdem ist konfiguriert, dass bei Testdurchführung automatisch Firefox gestartet werden und in diesem die Tests ausgeführt werden soll.\cite{karma-configurationFile, karma-files}
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel einer \texttt{karma.conf.js} (adaptiert nach \cite{karma-configurationFile, karma-files})}, label=lst:karma-conf-js]{lst/karma.conf.js}
+\end{figure}
+
+Die Funktionalität von Karma lässt sich mit Plugins erweitern. Sie werden für die Einbindung von Testframeworks, ein verändertes Ausgabeformat der Testergebnisse, Präprozessoren (z.\,B. für die Auslieferung von in JavaScript eingebettetem HTML oder die Ermittlung der Code Coverage)\cite{karma-preprocessors} oder die Einbindung von Browsern wie Firefox, Chrome oder PhantomJS (s. Abschnitt \ref{sec:PhantomJS}) benötigt. Jedes Plugin ist ein npm-Paket, daher werden Plugins über npm installiert. Karma bindet alle installierten Pakete mit dem Namen \texttt{karma-*} automatisch ein.\cite{karma-plugins} Im npm-Repository liegen über 1300 Karma-Plugins.\cite{karma-npm}
+
+\subsection{Jasmine}
+\label{sec:Jasmine}
+
+\subsection{Protractor}
+\label{sec:Protractor}
+
+\subsection{Mocha}
+\label{sec:Mocha}
+
+\subsection{QUnit}
+\label{sec:QUnit}
+
+\subsection{PhantomJS}
+\label{sec:PhantomJS}
