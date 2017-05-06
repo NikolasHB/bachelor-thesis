@@ -19,6 +19,19 @@ Die Funktionalität von Karma lässt sich mit Plugins erweitern. Sie werden für
 
 \subsection{Jasmine}
 \label{sec:Jasmine}
+Jasmine ist ein Behavior Driven Development Framework zum Test von JavaScript\cite{jasmine-introduction}. Es liegt unter \texttt{jasmine} im npm-Repository\cite{jasmine-getting-started}. Jasmine bietet eine saubere und einfache Syntax zur Beschreibung von Testfällen. Die Tests bestehen aus drei Ebenen: Testsuites, Spezifizierungen (\glqq Specs\grqq) und Erwartungen, also den eigentlichen Testassertions\cite{jasmine-introduction}. Ein beispielhafter Test findet sich in Listing \ref{lst:jasmine-1}.
+
+Eine Testsuite beginnt auf oberster Ebene mit dem Aufruf der globalen JavaScript-Funktion \texttt{describe(string, function)}. Der String ist hierbei der Name der Testsuite, üblicherweise wird hier das Testsubjekt benannt. Die Funktion implementiert die Testsuite und besteht aus Specs.\cite{jasmine-introduction}
+
+Ein Spec wird durch Aufruf der globalen Funktion \texttt{it(string, function)} angelegt. Der String enthält eine Beschreibung des Testfalls; nach dem BDD-Modell also eine Beschreibung des erwarteten Verhaltens. Die Funktion dient zum Überprüfen dieses Verhaltens und enthält Assertions, welche entweder \texttt{true} oder \texttt{false} ergeben. Liefern alle Assertions \texttt{true} so gilt die Spec als bestanden, ansonsten als durchgefallen.\cite{jasmine-introduction}
+
+Eine Assertion besteht in Jasmine aus der Funktion \texttt{expect(object)}, welcher der tatsächliche Wert übergeben wird. Diese wird mit einer Matcher-Funktion verkettet, welche den erwarteten Wert übergeben bekommt und die beiden Werte vergleicht und auswertet. Es wird eine Vielzahl an vorgefertigten Matchern mitgeliefert: \texttt{toEqual}, \texttt{toContain}, \texttt{toBeTruthy}, und Weitere\cite{jasmine-introduction, jasmine-cheatsheet}.
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel einer Jasmine-Testsuite (adaptiert nach \cite{jasmine-introduction})}, label=lst:jasmine-1]{lst/jasmine-1.js}
+\end{figure}
+
+Specs können als \textit{pending} deklariert werden. Sie werden dann nicht ausgeführt, aber im Ergebnis angezeigt. Hierfür kann beim Aufruf der \texttt{it}-Funktion die Übergabe einer Funktion weggelassen werden, stattdessen die \texttt{xit}-Funktion aufgerufen werden oder im Funktionskörper die \texttt{pending}-Funktion genutzt werden.\cite{jasmine-introduction}
 
 \subsection{Protractor}
 \label{sec:Protractor}
