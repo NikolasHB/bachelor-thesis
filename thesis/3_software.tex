@@ -35,6 +35,21 @@ Specs können als \textit{pending} deklariert werden. Sie werden dann nicht ausg
 
 \subsection{Protractor}
 \label{sec:Protractor}
+Protractor ist ein speziell für Angular-Anwendungen entwickeltes Framework für End-to-End-Tests. Die Tests werden in Browsern direkt gegen die Anwendungsoberfläche durchgeführt und simulieren somit das Verhalten eines echten Benutzers. Es liegt im npm-Repository mit der ID \texttt{protractor} und ist dadurch einfach zu installieren.\cite{protractor-index}
+
+Für die Steuerung des Browsers greift Protractor auf Selenium zurück\cite{protractor-index}, welches den W3C WebDriver-Standard implementiert und als Proxyserver zwischen Protractor und dem Browser agiert\cite{selenium}. Selenium unterstützt alle großen Webbrowser: aktuell die aktuellsten Versionen von Firefox, Internet Explorer ab Version 7, Safari ab Version 5.1, Opera und Chrome\cite{selenium-browsers}. Vom Einsatz von PhantomJS (s. Abschnitt \ref{sec:PhantomJS}) zusammen mit Protractor wird ausdrücklich abgeraten, da es hier Berichten zufolge häufig zu Abstürzen und abweichendem Verhalten kommt\cite{protractor-browser}. Laut eigener Aussage wird Selenium automatisch zusammen mit Protractor installiert und ist nach Aufruf von \texttt{webdriver-manager update} und \texttt{webdriver-manager start} ohne weitere Konfiguration lauffähig\cite{protractor-index}.
+
+Protractor nutzt als Framework für die Testbeschreibung standardmäßig Jasmine (s. Abschnitt \ref{sec:Jasmine}), unterstützt out-of-the-box aber auch Mocha (s. Abschnitt \ref{sec:Mocha}). Die nachfolgenden Beispiele nutzen daher auch Jasmine. Das eingesetzte Testframework, die Adresse unter welcher der Selenium-Server angesprochen wird, Testdateien, Timeouts, für den Test zu verwendende Browser und weitere Feineinstellungen werden in einer Konfigurationsdatei (s. Listing \ref{lst:protractor-conf}) konfiguriert.
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel einer Protractor-Konfiguration (adaptiert nach \cite{protractor-tutorial})}, label=lst:protractor-conf]{lst/protractor.conf.js}
+\end{figure}
+
+Üblicherweise hat jede zu testende Seite eine eigene Testsuite und jeder Testfall ist eine eigene Spec (s. Listing \ref{lst:protractor-spec}). Vor der eigentlichen Testdurchführung muss die jeweilige Seite aufgerufen werden: hierzu dient die durch Protractor bereitgestellte Funktion \texttt{browser.get(url)}. Es bietet sich an, diese in \texttt{beforeEach()} auszuführen, einer Funktion die durch Jasmine vor jedem Spec aufgerufen wird. Auf Elemente kann mit der Funktion \texttt{element} zugegriffen werden, welcher ein Locator übergeben wird. Locator sind ein durch Protractor definiertes Konstrukt und beschreiben, wie das Element gefunden werden kann. Um mit den gefundenen Elementen zu interagieren werden verschiedene Funktionen bereitgestellt: beispielsweise \texttt{sendKeys} zur Zeicheneingabe, \texttt{click} zum Simulieren eines Mausklicks oder \texttt{getText} um den Elementinhalt zu ermitteln.
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel einer Spec für Protractor (aus \cite{protractor-tutorial})}, label=lst:protractor-spec]{lst/protractor.spec.js}
+\end{figure}
 
 \subsection{Mocha}
 \label{sec:Mocha}
