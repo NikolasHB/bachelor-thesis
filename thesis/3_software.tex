@@ -1,7 +1,7 @@
-\section{Softwarerecherche}
+\subsection{Softwarerecherche}
 Im folgenden Kapitel werden verschiedene Tools und Frameworks zur Realisierung von automatisierten Tests untersucht. Einen Überblick über zur Verfügung stehende Tools bieten dabei \textcite{unittest-overview} und Weitere.
 
-\subsection{Karma}
+\subsubsection{Karma}
 \label{sec:Karma}
 Karma ist ein Test-Runner für die Ausführung von JavaScript-Tests. Er wurde vom AngularJS-Team ins Leben gerufen und wird auf GitHub von einer Open-Source-Gemeinschaft weiterentwickelt.\cite{karma-index} Karma liegt als Paket \texttt{karma} im npm-Repository\cite{karma-faq}.
 
@@ -17,7 +17,7 @@ Für die Konfiguration wird eine JavaScript-Datei, die \texttt{karma.conf.js}, g
 
 Die Funktionalität von Karma lässt sich mit Plugins erweitern. Sie werden für die Einbindung von Testframeworks, ein verändertes Ausgabeformat der Testergebnisse, Präprozessoren (z.\,B. für die Auslieferung von in JavaScript eingebettetem HTML oder die Ermittlung der Code Coverage)\cite{karma-preprocessors} oder die Einbindung von Browsern wie Firefox, Chrome oder PhantomJS (s. Abschnitt \ref{sec:PhantomJS}) benötigt. Jedes Plugin ist ein npm-Paket, daher werden Plugins über npm installiert. Karma bindet alle installierten Pakete mit dem Namen \texttt{karma-*} automatisch ein.\cite{karma-plugins} Im npm-Repository liegen über 1300 Karma-Plugins.\cite{karma-npm}
 
-\subsection{Jasmine}
+\subsubsection{Jasmine}
 \label{sec:Jasmine}
 Jasmine ist ein Behavior Driven Development Framework zum Test von JavaScript\cite{jasmine-introduction}. Es liegt unter \texttt{jasmine} im npm-Repository\cite{jasmine-getting-started}. Jasmine bietet eine saubere und einfache Syntax zur Beschreibung von Testfällen. Die Tests bestehen aus drei Ebenen: Testsuites, Spezifizierungen (\glqq Specs\grqq) und Erwartungen, also den eigentlichen Testassertions\cite{jasmine-introduction}. Ein beispielhafter Test findet sich in Listing \ref{lst:jasmine-1}.
 
@@ -33,7 +33,7 @@ Eine Assertion besteht in Jasmine aus der Funktion \texttt{expect(object)}, welc
 
 Specs können als \textit{pending} deklariert werden. Sie werden dann nicht ausgeführt, aber im Ergebnis angezeigt. Hierfür kann beim Aufruf der \texttt{it}-Funktion die Übergabe einer Funktion weggelassen werden, stattdessen die \texttt{xit}-Funktion aufgerufen werden oder im Funktionskörper die \texttt{pending}-Funktion genutzt werden.\cite{jasmine-introduction}
 
-\subsection{Protractor}
+\subsubsection{Protractor}
 \label{sec:Protractor}
 Protractor ist ein speziell für Angular-Anwendungen entwickeltes Framework für End-to-End-Tests. Die Tests werden in Browsern direkt gegen die Anwendungsoberfläche durchgeführt und simulieren somit das Verhalten eines echten Benutzers. Es liegt im npm-Repository mit der ID \texttt{protractor} und ist dadurch einfach zu installieren.\cite{protractor-index}
 
@@ -51,11 +51,51 @@ Protractor nutzt als Framework für die Testbeschreibung standardmäßig Jasmine
 	\lstinputlisting[caption={Beispiel einer Spec für Protractor (aus \cite{protractor-tutorial})}, label=lst:protractor-spec]{lst/protractor.spec.js}
 \end{figure}
 
-\subsection{Mocha}
+\subsubsection{Mocha}
 \label{sec:Mocha}
+Mocha ist ein Testframework und Test-Runner, welches sowohl in Node.js als auch in Browsern lauffähig ist. Es liegt als Paket \texttt{mocha} im npm-Repository und kann darüber installiert werden.\cite{mocha-index}
 
-\subsection{QUnit}
+Tests bestehen in Mocha aus drei Ebenen. Die Oberste sind die Testsuites, welche weitere Testsuites oder Testfälle enthalten können. Testfälle bestehen aus funktionalem Code sowie Assertions als eigentliche Testüberprüfung. Es werden verschiedene Stile zur Testbeschreibung unterstützt: BDD, TDD, QUnit und weitere, welche sich nur in ihrem Aussehen unterscheiden und Entwicklern ermöglichen, ihren eigenen Stil zur Definition von Tests zu wählen.\cite{mocha-index}
+
+Für Assertions können in Mocha verschiedene Frameworks genutzt werden. In \cite{mocha-index} wird beispielsweise die Nutzung von \textit{should.js} bei Verwendung des BDD-Stils, \textit{expect.js} oder \textit{chai} (s. Abschnitt \ref{sec:Chai}) empfohlen. Es ist einem Entwickler somit möglich, Mocha auf die eigenen Vorlieben anzupassen.\cite{mocha-index}
+
+Auf eine genauere Vorstellung und Codebeispiele wird an dieser Stelle aufgrund der Vielseitigkeit verzichtet.
+\todo{Konfiguration, synchron-asynchron, Reporter, Src-Bsp}
+
+\subsubsection{QUnit}
 \label{sec:QUnit}
+QUnit ist ein Framework für automatisierte Komponententests mit JavaScript und wird von jQuery und einer Vielzahl weiterer Projekten genutzt. Es liegt unter \texttt{qunitjs} als Paket im npm-Repository. Es kann sowohl in Browsern als auch in Node.js ausgeführt werden.\cite{qunit-index}
 
-\subsection{PhantomJS}
+In QUnit geschriebene Tests ähneln denen vieler Testframeworks populärer anderer Sprachen, wie beispielsweise JUnit in Java. Ein Testfall wird mittels Aufruf von \texttt{QUnit.test(string, function)} definiert. In der übergebenen Funktion kann Testcode aufgerufen werden und das Ergebnis mit Assertions validiert werden. Wenn mindestens eine Assertion fehlschlägt, gilt der Test als fehlgeschlagen; sonst als bestanden. QUnit liefert Assertions mit: beispielsweise \texttt{assert.ok}, welche einen truthy Wert erwartet, oder \texttt{assert.equal}, welches zwei als gleich angesehene Werte erwartet.\cite{qunit-cookbook}
+
+Tests können in durch Aufruf von \texttt{QUnit.module(string)} erzeugten Modulen gruppiert werden (s. Listing \ref{lst:qunit-test}). In Modulen kann Code ausgelagert werden, indem die vor und nach jedem Test aufgerufenen Funktionen \texttt{beforeEach} und \texttt{afterEach} definiert werden.\cite{qunit-cookbook}
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel mehrerer Tests für QUnit (adaptiert nach \cite{qunit-cookbook})}, label=lst:qunit-test]{lst/qunit-1.js}
+\end{figure}
+\subsubsection{PhantomJS}
 \label{sec:PhantomJS}
+
+\subsubsection{Chai}
+\label{sec:Chai}
+
+\subsubsection{Cucumber}
+\label{sec:Cucumber}
+
+\subsubsection{Unit JS}
+\label{sec:UnitJS}
+
+\subsubsection{Buster.js}
+\label{sec:BusterJS}
+
+\subsubsection{Sinon}
+\label{sec:Sinon}
+
+\subsubsection{ngMock}
+\label{sec:ngMock}
+
+\subsubsection{Intern}
+\label{sec:Intern}
+
+\subsubsection{Ava}
+\label{sec:Ava}
