@@ -73,11 +73,31 @@ Tests können in durch Aufruf von \texttt{QUnit.module(string)} erzeugten Module
 \begin{figure}[H]
 	\lstinputlisting[caption={Beispiel mehrerer Tests für QUnit (adaptiert nach \cite{qunit-cookbook})}, label=lst:qunit-test]{lst/qunit-1.js}
 \end{figure}
+
 \subsubsection{PhantomJS}
 \label{sec:PhantomJS}
+PhantomJS ist ein skriptbarer WebKit-Browser ohne Benutzeroberfläche und ist über eine JavaScript-API ansteuerbar. Er bietet native Unterstützung für Webstandards wie DOM, CSS-Selektoren, JSON, HTML-Canvas und SVG.\cite{phantomjs-index} PhantomJS steht nicht als npm-Paket zur Verfügung, sondern lässt sich lediglich als Binary installierten\cite{phantomjs-faq}. PhantomJS ist auch eine Laufzeitumgebung für JavaScript, so dass für ihn bestimmte Skripte nicht in Node.js ausgeführt werden können, sondern nur in PhantomJS\cite{phantomjs-quickstart}.
+
+Für das Laden von Webseiten sind Page-Objekte zuständig, über welche eine URL geladen werden kann, Screenshots gespeichert werden können oder auf DOM-Eigenschaften zugegriffen werden kann. Ein Beispiel findet sich in Listing \ref{lst:phantomjs}. JavaScript-Code kann im Kontext einer geladenen Seite mit der \texttt{evaluate}-Funktion ausgeführt werden; die Ausführung erfolgt in einer Sandbox und kann somit nicht auf Objekte, Variablen oder Funktionen außerhalb des Kontexts zugreifen.\cite{phantomjs-quickstart}
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel eines Seitenaufrufs mit PhantomJS (aus \cite{phantomjs-quickstart})}, label=lst:phantomjs]{lst/phantom.js}
+\end{figure}
+
+Ein großer Nutzungsbereich von PhantomJS liegt im Testen von Webanwendungen; geeignet ist es beispielsweise für den Einsatz in Kommandozeilenumgebungen oder Continuous-Integration-Systemen. PhantomJS an sich ist kein Testframework, sondern dient der Ausführung eines beliebigen Testframeworks. Es existieren Frameworks welche speziell auf PhantomJS aufbauen und komfortable Funktionalitäten für Testzwecke zur Verfügung stellen: z.\,B. CasperJS (s. Abschnitt \ref{sec:CasperJS}) oder WebSpecter, welches sich allerdings noch in einer frühen Entwicklungsphase befindet.\cite{phantomjs-testing}
 
 \subsubsection{Chai}
 \label{sec:Chai}
+Chai ist eine Assertion-Bibliothek, welche mit jedem Testframework kombiniert werden kann. Chai bietet verschiedene Assertion-Stile, so dass der Entwickler seinen eigenen Stil wählen kann.\cite{chai-index} Chai ist unter der ID \texttt{chai} über npm verfügbar und kann so installiert und in Projekte eingebunden werden\cite{chai-installation}.
+
+Der Assert-Stil ähnelt klassischeren Testframeworks wie QUnit oder dem Assert-Modul in Node.JS. Über das \texttt{assert}-Objekt werden Funktionen zur Verfügung gestellt, zum Beispiel \texttt{isOk} zur Überprüfung, ob der Parameter truthy ist oder \texttt{equal} zur Überprüfung, ob die Parameter gleich sind. Jeder Funktion kann eine optionale Nachricht übergeben werden, welche im Falle eines Fehlschlags in der Fehlermeldung angezeigt wird.\cite{chai-assert}
+
+Der BDD-Stil wird in zwei Varianten zur Verfügung gestellt: \texttt{expect} und \texttt{should}. Er ermöglicht es Assertions in einer natursprachlichen Form zu schreiben, welche somit gut lesbar sind. Die should-Variante hat einige Nachteile, weshalb an dieser Stelle nur die expect-Variante betrachtet wird. \texttt{Expect} ist eine Funktion, welcher der zu überprüfende Wert übergeben wird. Diese Methode wird mit weiteren Objekten und Funktionen verkettet, um die Assertion zu bilden.\cite{chai-styles} Ein Beispiel hierzu findet sich in Listing \ref{lst:chai-expect}.
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel von Assertions mit dem expect-Stil von Chai (aus \cite{chai-styles})}, label=lst:chai-expect]{lst/chai-expect.js}
+\end{figure}
+
 
 \subsubsection{Cucumber}
 \label{sec:Cucumber}
@@ -99,3 +119,19 @@ Tests können in durch Aufruf von \texttt{QUnit.module(string)} erzeugten Module
 
 \subsubsection{Ava}
 \label{sec:Ava}
+
+\subsubsection{CasperJS}
+\label{sec:CasperJS}
+CasperJS ist ein Framework für Navigation und Test in PhantomJS. Es steht unter \texttt{casperjs} im npm-Repository zur Verfügung.\cite{casperjs-index} Trotz dessen ist es nicht unter Node.js lauffähig\cite{casperjs-faq}, sondern benötigt Python\cite{casperjs-installation}.
+
+Es ermöglicht die Erstellung von komplexen Navigationsszenarien unter Benutzung von High-Level-Funktionen. Hierzu werden u.\,a. die Funktionen \texttt{casper.start}, \texttt{casper.then}, \texttt{casper.thenOpen} und \texttt{casper.back} sequentiell aufgerufen. Das Szenario kann dann mittels \texttt{casper.run} aufgerufen werden und wird nacheinander abgearbeitet. Es stehen diverse Funktionen wie \texttt{casper.click}, \texttt{casper.fill} oder \texttt{casper.evaluate} zur DOM-Manipulation zur Verfügung. Für alle Browser-Operationen und DOM-Manipulationen wird als Browser PhantomJS genutzt, welcher von CasperJS gestartet wird. Die Ansteuerung von PhantomJS wird durch CasperJS vereinfacht, wodurch sich einfacher wartbarerer Code ergibt\cite{casperjs-better-phantomjs}. Ein beispielhaftes Navigationsszenario findet sich in Listing \ref{lst:casper-scenario}.\cite{casperjs-index}
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel eines Navigationsszenarios mit CasperJS (adaptiert nach \cite{casperjs-index})}, label=lst:casper-scenario]{lst/casper-scenario.js}
+\end{figure}
+
+CasperJS enthält auch ein einfaches Testframework. Ein Test wird durch Aufruf der Funktion \texttt{casper.test.begin} definiert und mit \texttt{test.done} beendet. Er gilt als erfolgreich, wenn er ohne fehlgeschlagene Assertions beendet wurde. Navigationsszenarien und Tests können verschachtelt werden, so dass mit CasperJS auch End-To-End-Tests durchgeführt werden können.\cite{casperjs-index, casperjs-test} Ein einfacher Test ist in Listing \ref{lst:casper-test} zu finden.
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel eines Tests mit CasperJS (aus \cite{casperjs-test})}, label=lst:casper-test]{lst/casper-test.js}
+\end{figure}
