@@ -102,12 +102,6 @@ Der BDD-Stil wird in zwei Varianten zur Verfügung gestellt: \texttt{expect} und
 \subsubsection{Cucumber}
 \label{sec:Cucumber}
 
-\subsubsection{Unit JS}
-\label{sec:UnitJS}
-
-\subsubsection{Buster.js}
-\label{sec:BusterJS}
-
 \subsubsection{Sinon}
 \label{sec:Sinon}
 
@@ -116,6 +110,32 @@ Der BDD-Stil wird in zwei Varianten zur Verfügung gestellt: \texttt{expect} und
 
 \subsubsection{Intern}
 \label{sec:Intern}
+Intern ist ein Framework für automatisierte Tests in JavaScript. Es bietet sowohl Möglichkeiten für Komponenten- als auch für End-To-End-Tests. Intern ist flexibel und bietet dem Entwickler Möglichkeiten, seinen eigenen Stil zu verfolgen. Es steht als Paket \texttt{intern} über npm zur Verfügung.\cite{intern-userguide}
+
+Intern stellt verschiedene Interfaces zur Definierung von Tests bereit; es können auch eigene definiert werden. Das \textit{Object}-Interface ist eine einzelne Funktion, welcher ein Objekt übergeben wird, welches alle definierten Tests enthält. In diesem Objekt werden außerdem Funktionen die vor oder nach jedem Test oder der Testsuite ausgeführt werden sollen definiert. Ein Beispiel findet sich in Listing \ref{lst:intern-object}.\cite{intern-userguide}
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel einer Testsuite in Intern (aus \cite{intern-userguide})}, label=lst:intern-object]{lst/intern-object.js}
+\end{figure}
+
+Die Interfaces \textit{BDD} und \textit{TDD} ähneln einander und unterscheiden sich nur durch die Benennung einzelner Funktionen. Sie verfolgen gegenüber dem Object-Interface einen prozeduraleren Ansatz, basieren also auf verschachtelt aufgerufenen Funktionen statt auf Objekten. Auch hier können Funktionen definiert werden, welche vor oder nach jedem Test oder der Suite aufgerufen werden. Ein Beispiel ist in Listing \ref{lst:intern-bdd} zu finden.\cite{intern-userguide}
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel einer Testsuite in Intern (aus \cite{intern-userguide})}, label=lst:intern-bdd]{lst/intern-bdd.js}
+\end{figure}
+
+Es steht ein Interface zur Verfügung, welches QUnit nachempfindet und somit die Verwendung von in QUnit geschriebenen Tests (s. Listing \ref{lst:qunit-test} in Abschnitt \ref{sec:QUnit}) in Intern ermöglicht. Für alle Tests gilt, dass ein Test fehlschlägt, wenn in ihm ein Error auftritt, also eine Assertion fehlschlägt. Ansonsten gilt er als bestanden. Die Chai-Bibliothek ist in Intern enthalten, es ist jedoch auch die Nutzung von beliebigen anderen Assertion-Frameworks möglich. Durch Aufruf der Funktion \texttt{skip} können Tests übersprungen werden.\cite{intern-userguide}
+
+End-To-End-Tests werden genau wie Unit-Tests definiert, werden jedoch in der Konfiguration in \texttt{functionalSuites} und nicht in \texttt{suites} aufgeführt. Hierdurch werden sie im Kontext des Test-Runners und nicht in der zu testenden Umgebung ausgeführt. Für die Interaktion mit dem Browser verwendet Intern mit \textit{leadfoot} einen Wrapper für Selenium. Über das in \texttt{this.remote} zur Verfügung gestellte Leadfoot-Command-Objekt können Befehle im Browser ausgeführt werden.\cite{intern-userguide}
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel eines End-To-End-Tests in Intern (aus \cite{intern-userguide})}, label=lst:intern-e2e]{lst/intern-e2e.js}
+\end{figure}
+
+Im Beispiel in Listing \ref{lst:intern-e2e} wird ein Testfall \glqq greeting form\grqq{} definiert, in welchem die Index-Seite geladen wird und auf dieser in einem Eingabefeld der Wert \glqq Elaine\grqq{} eingegeben und der Submit-Button geklickt wird. Abschließend wird überprüft ob das Element mit der ID \glqq greeting\grqq{} den korrekten Inhalt enthält.
+
+Intern ermittelt standardmäßig beim Ausführen von Tests die Code Coverage, also die Abdeckung von Codezeilen, Funktionen, Zweigen und Anweisungen. Die Ausgabe sowohl von Code Coverage als auch der Testergebnisse ist konfigurierbar.\cite{intern-userguide}
+
 
 \subsubsection{Ava}
 \label{sec:Ava}
