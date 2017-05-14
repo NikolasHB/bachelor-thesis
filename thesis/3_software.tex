@@ -1,5 +1,5 @@
 \subsection{Softwarerecherche}
-Im folgenden Kapitel werden verschiedene Tools und Frameworks zur Realisierung von automatisierten Tests untersucht. Einen Überblick über zur Verfügung stehende Tools bieten dabei \textcite{unittest-overview} und Weitere.
+Im folgenden Kapitel werden verschiedene Tools und Frameworks zur Realisierung von automatisierten Tests untersucht. Einen Überblick über zur Verfügung stehende Tools bieten dabei \cite{unittest-overview} und Weitere.
 
 \subsubsection{Karma}
 \label{sec:Karma}
@@ -99,9 +99,6 @@ Der BDD-Stil wird in zwei Varianten zur Verfügung gestellt: \texttt{expect} und
 \end{figure}
 
 
-\subsubsection{Cucumber}
-\label{sec:Cucumber}
-
 \subsubsection{Sinon}
 \label{sec:Sinon}
 
@@ -136,9 +133,15 @@ Im Beispiel in Listing \ref{lst:intern-e2e} wird ein Testfall \glqq greeting for
 
 Intern ermittelt standardmäßig beim Ausführen von Tests die Code Coverage, also die Abdeckung von Codezeilen, Funktionen, Zweigen und Anweisungen. Die Ausgabe sowohl von Code Coverage als auch der Testergebnisse ist konfigurierbar.\cite{intern-userguide}
 
-
-\subsubsection{Ava}
+\subsubsection{AVA}
 \label{sec:Ava}
+AVA ist ein Test-Runner für in JavaScript geschriebene Tests. Die Besonderheit ist, dass die Tests simultan ausgeführt werden und somit deutliche Performanceverbesserungen möglich sind. Es steht unter \texttt{ava} im npm-Repository zur Verfügung.\cite{ava}
+
+AVA läuft ausschließlich in Node.js; es gibt also keine Möglichkeit den Test-Runner im Browser aufzurufen. Ein Test wird über Aufruf einer Funktion, welche aus dem Node-Modul \textit{ava} importiert wird, definiert. Dieser Funktion wird ein Funktionskörper übergeben, welcher den Test spezifiert und Assertions durchführt. Ein Beispiel findet sich in Listing \ref{lst:ava}. Die Assertion-Funktionen werden über das übergebene Testobjekt \texttt{t} bereitgestellt. Es ist nicht vorgesehen andere Assertionframeworks zu nutzen. Mit den Funktionen \texttt{before}, \texttt{after}, \texttt{beforeEach} und \texttt{afterEach} können Funktionen definiert werden, welche vor oder nach jedem Test oder einmalig allen Tests ausgeführt werden.\cite{ava}
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel eines Tests mit AVA (adaptiert nacht \cite{ava})}, label=lst:ava]{lst/ava.js}
+\end{figure}
 
 \subsubsection{CasperJS}
 \label{sec:CasperJS}
