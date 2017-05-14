@@ -101,6 +101,26 @@ Der BDD-Stil wird in zwei Varianten zur Verfügung gestellt: \texttt{expect} und
 
 \subsubsection{Sinon}
 \label{sec:Sinon}
+Sinon ist ein Framework für die Realisierung von Fakes, also Mocks, Stubs und Spies, in JavaScript und arbeitet mit jedem Unit-Test-Framework zusammen. Es ist als \texttt{sinon} über npm verfügbar.\cite{sinonjs-index}
+
+\paragraph*{Spies}
+Spies sind Funktionen die relevante Aufrufdaten aufzeichnen: Argumente, Rückgabewert, geworfene Exceptions und den Aufrufer. Ein Spy kann sowohl als anonyme Funktion - durch Aufruf von \texttt{sinon.spy()} - als auch als Wrapper für existierende Methoden - dann durch Aufruf von \texttt{sinon.spy(object, 'method')} für das Überschreiben von \texttt{object.method()}.\cite{sinonjs-spies} Ein Beispiel für einen Spy auf einer anonymen Funktion findet sich in Listing \ref{lst:sinon-spy}.
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel eines anonymen Spy in Sinon (aus \cite{sinonjs-index})}, label=lst:sinon-spy]{lst/sinon-spy.js}
+\end{figure}
+
+\paragraph*{Stub}
+Stubs sind Spies mit einem vorprogrammierten Verhalten. Hierzu verfügen sie über die komplette Spy-API und zusätzliche Methoden, mit welchen ihr Verhalten angepasst werden kann. Anders als bei Spies wird bei einem Stub, welcher eine existierende Funktion überschreibt, diese nicht ausgeführt. Sie können benutzt werden um ein bestimmtes Verhalten von Funktionen zu provozieren, z.\,B. durch das Werfen von Fehlern, oder um zu verhindern, dass Funktionen ausgeführt werden, z.\,B. \texttt{XMLHttpRequest} damit kein HTTP-Request abgesetzt wird. Ein Aufruf von \texttt{sinon.stub().throws()} erzeugt beispielsweise einen anonymen Stub, welcher bei Aufruf eine Exception wirft.\cite{sinonjs-stubs}
+
+\paragraph*{Mocks}
+Mocks sind Stubs, welche zusätzlich vorprogrammierte Erwartungen haben. Ein Mock ist somit ein Stub, welcher Assertions enthält. Es wird empfohlen, dass maximal ein Mock pro Unittest existiert. Ein Beispiel für einen Mock, in welchem erwartet wird, dass die gemockte Methode einmal aufgerufen wird und diese eine Exception werfen soll, findet sich in Listing \ref{lst:sinon-mock}. Das Eintreffen der definierten Erwartungen wird letztlich durch Aufruf von \texttt{verify()} überprüft - ein Nicht-Zutreffen führt wie bei Assertions zum Fehlschlag des Tests.\cite{sinonjs-mocks}
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel eines Mocks in Sinon (aus \cite{sinonjs-mocks})}, label=lst:sinon-mock]{lst/sinon-mock.js}
+\end{figure}
+
+Sinon ermöglicht es, mit der Funktion \texttt{sinon.restore} alle Fakes, die auf einem übergebenen Objekt definiert wurden, zurückzusetzen. Es bietet außerdem die Möglichkeit \textit{Sandboxes} anzulegen, in welchen alle angelegten Fakes abgelegt werden. Dies erleichtert das Aufräumen und Entfernen aller Fakes, da dies nun nicht mehr einzeln geschehen muss, sondern ein Aufruf von \texttt{sandbox.restore} genügt.\cite{sinonjs-sandboxes}
 
 \subsubsection{ngMock}
 \label{sec:ngMock}
