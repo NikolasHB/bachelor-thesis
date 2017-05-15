@@ -124,6 +124,16 @@ Sinon ermöglicht es, mit der Funktion \texttt{sinon.restore} alle Fakes, die au
 
 \subsubsection{ngMock}
 \label{sec:ngMock}
+Bei ngMock handelt es sich um ein AngularJS-Modul, mit welchem andere Komponenten in Unit-Tests injiziert und gemockt werden können. Außerdem erweitert es diverse AngularJS-Kernservices, so dass diese in Testcode kontrolliert und inspiziert werden können. Es steht im npm-Repository unter \texttt{angular-mocks} zur Verfügung und muss in der Konfiguration des verwendeten Test-Runners so eingebaut werden, dass es nach \texttt{angular.js} geladen wird.\cite{angular-ngMock}
+
+Die Funktionsweise basiert auf den Methoden \texttt{angular.mock.module}, welche die übergebenen Module lädt\cite{angular-ngMockModule}, und \texttt{angular.mock.inject}, welche eine übergebene Funktion in eine Injizierbare wrapt, eine neue Injector-Instanz erstellt und die angegebenen Abhängigkeiten injiziert\cite{angular-ngMockInject}. Methoden von injizierten Abhängigkeiten können, beispielsweise mit Sinon (s. Abschnitt \ref{sec:Sinon}), mit Spies oder Mocks ersetzt werden.
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel eines Tests mit injizierten Abhängigkeiten mit ngMock (adaptiert nach \cite{watmore})}, label=lst:ngMock]{lst/ngMock.js}
+\end{figure}
+
+Im Beispiel (s. Listing \ref{lst:ngMock}) wird das Module \texttt{app} geladen und die Services \texttt{SimpleService} und \texttt{\$log} in die Testfunktion injiziert. Dadurch kann ein Spy auf \texttt{\$log.info} gesetzt werden und hierdurch das korrekte Logging von \texttt{SimpleService.DoSomething} validiert werden.
+
 
 \subsubsection{Intern}
 \label{sec:Intern}
