@@ -1,6 +1,27 @@
 \subsection{Anforderungsanalyse}
-\subsubsection{Anforderungen aufgrund Commerzbank-Richtlinien}
+An die auszuwählenden Frameworks oder Tools beziehungsweise eine Kombination Mehrerer stellen sich folgende Anforderungen:
+\begin{enumerate}
+	\item Es muss die Durchführung von Komponenten- und End-To-End-Tests möglich sein. Lasttests und statische Codeanalysen sind nicht erforderlich.
+	\item Es muss der Test von AngularJS-Anwendungen möglich sein.
+	\item Es darf keine zusätzliche Software (beispielsweise Python) zur Ausführung erforderlich sein; lediglich Node.js ist zulässig, da dies über die Standardsoftwareverteilung der Commerzbank verfügbar ist\todo{quelle}.
+	\item Gemäß SEF sollen Tests \glqq einen möglichst großen Teil der Funktionalität abdecken\grqq{}\cite{coba-sef}. Zur Überprüfung dessen muss eine Möglichkeit zur Ermittlung der Code Coverage bestehen.
+	\item Gemäß SEF müssen Testfälle eindeutig beschrieben werden; diese Beschreibung kann durch Implementierung der Testfälle erfolgen\cite{coba-sef}. Das Testframework soll daher eine Beschreibung der Tests forcieren.
+	\item Der Testcode soll leicht lesbar sein\cite[][7]{coba-programmierrichtlinienAllgemein}; hierzu bietet sich der BDD-Stil an, den das Testframework somit unterstützen soll.
+	\item Die Software soll eine geringe Einarbeitungszeit erfordern und problemlos zu verwenden sein. 
+	\item Sie soll aktiv gewartet und Fehler in ihr behoben werden.
+	\item Sie soll Open-Source und für den kommerziellen Einsatz freigegeben sein.
+	\item Es muss mindestens der aktuelle Commerzbank-Standard, ECMA-262 5.1, unterstützt werden\cite[][10]{coba-programmierrichtlinienJavaScript}.
+	\item Die Software muss über npm installierbar sein.
+	\item Sie muss unter Windows 7 funktionieren.
+	\item Wenn die Software Node.js benötigt, muss sie mit Version \todo{node version..} lauffähig sein.
+	\item Es soll die Testausführung via Node.js, Firefox \todo{version} und Internet Explorer \todo{version} möglich sein.
+	\item Der Einsatz von Spies, Stubs und Mocks muss bei Unit-Tests möglich sein.
+	\item Die Ausgabe der Testergebnisse muss konfigurierbar sein, um sie gegebenfalls in Prozessen oder anderen Tools der Commerzbank weiterverwenden zu können.
+	\item Das Bearbeiten aller Dateien in der TFS-Quellcodeverwaltung soll möglich sein, es dürfen somit keine proprietären Binärdateien zum Einsatz kommen.
+	\item Bei der Durchführung von End-To-End-Tests soll es möglich sein, die Ergebnisse mit Screenshots zu dokumentieren.
+\end{enumerate}
 
-\subsubsection{Weitere Anforderungen}
+
+\input{3_software}
 
 \subsection{Auswahlentscheidung}
