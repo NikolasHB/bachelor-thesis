@@ -1,5 +1,5 @@
 \subsection{Softwarerecherche}
-Einen Überblick über zur Verfügung stehende Tools bieten dabei \cite{unittest-overview} und Weitere.
+Einen Überblick über zur Verfügung stehende Tools bieten \cite{unittest-overview} und Weitere.
 
 \subsubsection{Karma}
 \label{sec:Karma}
@@ -17,6 +17,67 @@ Für die Konfiguration wird eine JavaScript-Datei, die \texttt{karma.conf.js}, g
 
 Die Funktionalität von Karma lässt sich mit Plugins erweitern. Sie werden für die Einbindung von Testframeworks, ein verändertes Ausgabeformat der Testergebnisse, Präprozessoren (z.\,B. für die Auslieferung von in JavaScript eingebettetem HTML oder die Ermittlung der Code Coverage)\cite{karma-preprocessors} oder die Einbindung von Browsern wie Firefox, Chrome oder PhantomJS (s. Abschnitt \ref{sec:PhantomJS}) benötigt. Jedes Plugin ist ein npm-Paket, daher werden Plugins über npm installiert. Karma bindet alle installierten Pakete mit dem Namen \texttt{karma-*} automatisch ein.\cite{karma-plugins} Im npm-Repository liegen über 1300 Karma-Plugins.\cite{karma-npm}
 
+\subsubsection{Mocha}
+\label{sec:Mocha}
+Mocha ist ein Testframework und Test-Runner, welches sowohl in Node.js als auch in Browsern lauffähig ist. Es liegt als Paket \texttt{mocha} im npm-Repository und kann darüber installiert werden.\cite{mocha-index}
+
+Tests bestehen in Mocha aus drei Ebenen. Die Oberste sind die Testsuites, welche weitere Testsuites oder Testfälle enthalten können. Testfälle bestehen aus funktionalem Code sowie Assertions als eigentliche Testüberprüfung. Es werden verschiedene Stile zur Testbeschreibung unterstützt: BDD, TDD, QUnit und weitere, welche sich nur in ihrem Aussehen unterscheiden und Entwicklern ermöglichen, ihren eigenen Stil zur Definition von Tests zu wählen.\cite{mocha-index}
+
+Für Assertions können in Mocha verschiedene Frameworks genutzt werden. In \cite{mocha-index} wird beispielsweise die Nutzung von \textit{should.js} bei Verwendung des BDD-Stils, \textit{expect.js} oder \textit{chai} (s. Abschnitt \ref{sec:Chai}) empfohlen. Es ist einem Entwickler somit möglich, Mocha auf die eigenen Vorlieben anzupassen.\cite{mocha-index} Auf eine genauere Vorstellung und Codebeispiele wird an dieser Stelle aufgrund der Vielseitigkeit verzichtet.
+
+Mocha ermöglicht es, die Testausgabe beliebig zu konfigurieren, so dass beispielsweise eine Ausgabe in der Konsole, als HTML-Datei, als JSON oder im XML-Format möglich ist. Bei besonderen Anforderungen können eigene Reporter erstellt werden, z.\,B. zur Einbindung in Continuous-Integration-Tools.
+
+\subsubsection{AVA}
+\label{sec:Ava}
+AVA ist ein Test-Runner für in JavaScript geschriebene Tests. Die Besonderheit ist, dass die Tests simultan ausgeführt werden und somit deutliche Performanceverbesserungen möglich sind. Es steht unter \texttt{ava} im npm-Repository zur Verfügung.\cite{ava}
+
+AVA läuft ausschließlich in Node.js; es gibt also keine Möglichkeit den Test-Runner im Browser aufzurufen. Ein Test wird über Aufruf einer Funktion, welche aus dem Node-Modul \textit{ava} importiert wird, definiert. Dieser Funktion wird ein Funktionskörper übergeben, welcher den Test spezifiert und Assertions durchführt. Ein Beispiel findet sich in Listing \ref{lst:ava}. Die Assertion-Funktionen werden über das übergebene Testobjekt \texttt{t} bereitgestellt. Es ist nicht vorgesehen andere Assertionframeworks zu nutzen. Mit den Funktionen \texttt{before}, \texttt{after}, \texttt{beforeEach} und \texttt{afterEach} können Funktionen definiert werden, welche vor oder nach jedem Test oder einmalig allen Tests ausgeführt werden.\cite{ava}
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel eines Tests mit AVA (adaptiert nach \cite{ava})}, label=lst:ava]{lst/ava.js}
+\end{figure}
+
+\subsubsection{QUnit}
+\label{sec:QUnit}
+QUnit ist ein Framework für automatisierte Komponententests mit JavaScript und wird von jQuery und einer Vielzahl weiterer Projekten genutzt. Es liegt unter \texttt{qunitjs} als Paket im npm-Repository. Es kann sowohl in Browsern als auch in Node.js ausgeführt werden.\cite{qunit-index}
+
+In QUnit geschriebene Tests ähneln denen vieler Testframeworks populärer anderer Sprachen, wie beispielsweise JUnit in Java. Ein Testfall wird mittels Aufruf von \texttt{QUnit.test(string, function)} definiert. In der übergebenen Funktion kann Testcode aufgerufen werden und das Ergebnis mit Assertions validiert werden. Wenn mindestens eine Assertion fehlschlägt, gilt der Test als fehlgeschlagen; sonst als bestanden. QUnit liefert Assertions mit: beispielsweise \texttt{assert.ok}, welche einen truthy Wert erwartet, oder \texttt{assert.equal}, welches zwei als gleich angesehene Werte erwartet.\cite{qunit-cookbook}
+
+Tests können in durch Aufruf von \texttt{QUnit.module(string)} erzeugten Modulen gruppiert werden (s. Listing \ref{lst:qunit-test}). In Modulen kann Code ausgelagert werden, indem die vor und nach jedem Test aufgerufenen Funktionen \texttt{beforeEach} und \texttt{afterEach} definiert werden.\cite{qunit-cookbook}
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel mehrerer Tests für QUnit (adaptiert nach \cite{qunit-cookbook})}, label=lst:qunit-test]{lst/qunit-1.js}
+\end{figure}
+
+\subsubsection{Intern}
+\label{sec:Intern}
+Intern ist ein Framework für automatisierte Tests in JavaScript. Es bietet sowohl Möglichkeiten für Komponenten- als auch für End-To-End-Tests. Intern ist flexibel und bietet dem Entwickler Möglichkeiten, seinen eigenen Stil zu verfolgen. Es steht als Paket \texttt{intern} über npm zur Verfügung.\cite{intern-userguide}
+
+Intern stellt verschiedene Interfaces zur Definierung von Tests bereit; es können auch eigene definiert werden. Das \textit{Object}-Interface ist eine einzelne Funktion, welcher ein Objekt übergeben wird, welches alle definierten Tests enthält. In diesem Objekt werden außerdem Funktionen die vor oder nach jedem Test oder der Testsuite ausgeführt werden sollen definiert. Ein Beispiel findet sich in Listing \ref{lst:intern-object}.\cite{intern-userguide}
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel einer Testsuite in Intern (aus \cite{intern-userguide})}, label=lst:intern-object]{lst/intern-object.js}
+\end{figure}
+
+Die Interfaces \textit{BDD} und \textit{TDD} ähneln einander und unterscheiden sich nur durch die Benennung einzelner Funktionen. Sie verfolgen gegenüber dem Object-Interface einen prozeduraleren Ansatz, basieren also auf verschachtelt aufgerufenen Funktionen statt auf Objekten. Auch hier können Funktionen definiert werden, welche vor oder nach jedem Test oder der Suite aufgerufen werden. Ein Beispiel ist in Listing \ref{lst:intern-bdd} zu finden.\cite{intern-userguide}
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel einer Testsuite in Intern (aus \cite{intern-userguide})}, label=lst:intern-bdd]{lst/intern-bdd.js}
+\end{figure}
+
+Es steht ein Interface zur Verfügung, welches QUnit nachempfindet und somit die Verwendung von in QUnit geschriebenen Tests (s. Listing \ref{lst:qunit-test} in Abschnitt \ref{sec:QUnit}) in Intern ermöglicht. Für alle Tests gilt, dass ein Test fehlschlägt, wenn in ihm ein Error auftritt, also eine Assertion fehlschlägt. Ansonsten gilt er als bestanden. Die Chai-Bibliothek ist in Intern enthalten, es ist jedoch auch die Nutzung von beliebigen anderen Assertion-Frameworks möglich. Durch Aufruf der Funktion \texttt{skip} können Tests übersprungen werden.\cite{intern-userguide}
+
+End-To-End-Tests werden genau wie Unit-Tests definiert, werden jedoch in der Konfiguration in \texttt{functionalSuites} und nicht in \texttt{suites} aufgeführt. Hierdurch werden sie im Kontext des Test-Runners und nicht in der zu testenden Umgebung ausgeführt. Für die Interaktion mit dem Browser verwendet Intern mit \textit{leadfoot} einen Wrapper für Selenium. Über das in \texttt{this.remote} zur Verfügung gestellte Leadfoot-Command-Objekt können Befehle im Browser ausgeführt werden.\cite{intern-userguide}
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel eines End-To-End-Tests in Intern (aus \cite{intern-userguide})}, label=lst:intern-e2e]{lst/intern-e2e.js}
+\end{figure}
+
+Im Beispiel in Listing \ref{lst:intern-e2e} wird ein Testfall \glqq greeting form\grqq{} definiert, in welchem die Index-Seite geladen wird und auf dieser in einem Eingabefeld der Wert \glqq Elaine\grqq{} eingegeben und der Submit-Button geklickt wird. Abschließend wird überprüft ob das Element mit der ID \glqq greeting\grqq{} den korrekten Inhalt enthält.
+
+Intern ermittelt standardmäßig beim Ausführen von Tests die Code Coverage, also die Abdeckung von Codezeilen, Funktionen, Zweigen und Anweisungen. Die Ausgabe sowohl von Code Coverage als auch der Testergebnisse ist konfigurierbar.\cite{intern-userguide}
+
+
 \subsubsection{Jasmine}
 \label{sec:Jasmine}
 Jasmine ist ein Behavior Driven Development Framework zum Test von JavaScript\cite{jasmine-introduction}. Es liegt unter \texttt{jasmine} im npm-Repository\cite{jasmine-getting-started}. Jasmine bietet eine saubere und einfache Syntax zur Beschreibung von Testfällen. Die Tests bestehen aus drei Ebenen: Testsuites, Spezifizierungen (\glqq Specs\grqq) und Erwartungen, also den eigentlichen Testassertions\cite{jasmine-introduction}. Ein beispielhafter Test findet sich in Listing \ref{lst:jasmine-1}.
@@ -32,6 +93,18 @@ Eine Assertion besteht in Jasmine aus der Funktion \texttt{expect(object)}, welc
 \end{figure}
 
 Specs können als \textit{pending} deklariert werden. Sie werden dann nicht ausgeführt, aber im Ergebnis angezeigt. Hierfür kann beim Aufruf der \texttt{it}-Funktion die Übergabe einer Funktion weggelassen werden, stattdessen die \texttt{xit}-Funktion aufgerufen werden oder im Funktionskörper die \texttt{pending}-Funktion genutzt werden.\cite{jasmine-introduction}
+
+\subsubsection{Chai}
+\label{sec:Chai}
+Chai ist eine Assertion-Bibliothek, welche mit jedem Testframework kombiniert werden kann. Chai bietet verschiedene Assertion-Stile, so dass der Entwickler seinen eigenen Stil wählen kann.\cite{chai-index} Chai ist unter der ID \texttt{chai} über npm verfügbar und kann so installiert und in Projekte eingebunden werden\cite{chai-installation}.
+
+Der Assert-Stil ähnelt klassischeren Testframeworks wie QUnit oder dem Assert-Modul in Node.JS. Über das \texttt{assert}-Objekt werden Funktionen zur Verfügung gestellt, zum Beispiel \texttt{isOk} zur Überprüfung, ob der Parameter truthy ist oder \texttt{equal} zur Überprüfung, ob die Parameter gleich sind. Jeder Funktion kann eine optionale Nachricht übergeben werden, welche im Falle eines Fehlschlags in der Fehlermeldung angezeigt wird.\cite{chai-assert}
+
+Der BDD-Stil wird in zwei Varianten zur Verfügung gestellt: \texttt{expect} und \texttt{should}. Er ermöglicht es Assertions in einer natursprachlichen Form zu schreiben, welche somit gut lesbar sind. Die should-Variante hat einige Nachteile, weshalb an dieser Stelle nur die expect-Variante betrachtet wird. \texttt{Expect} ist eine Funktion, welcher der zu überprüfende Wert übergeben wird. Diese Methode wird mit weiteren Objekten und Funktionen verkettet, um die Assertion zu bilden.\cite{chai-styles} Ein Beispiel hierzu findet sich in Listing \ref{lst:chai-expect}.
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel von Assertions mit dem expect-Stil von Chai (aus \cite{chai-styles})}, label=lst:chai-expect]{lst/chai-expect.js}
+\end{figure}
 
 \subsubsection{Protractor}
 \label{sec:Protractor}
@@ -51,28 +124,9 @@ Protractor nutzt als Framework für die Testbeschreibung standardmäßig Jasmine
 	\lstinputlisting[caption={Beispiel einer Spec für Protractor (aus \cite{protractor-tutorial})}, label=lst:protractor-spec]{lst/protractor.spec.js}
 \end{figure}
 
-\subsubsection{Mocha}
-\label{sec:Mocha}
-Mocha ist ein Testframework und Test-Runner, welches sowohl in Node.js als auch in Browsern lauffähig ist. Es liegt als Paket \texttt{mocha} im npm-Repository und kann darüber installiert werden.\cite{mocha-index}
 
-Tests bestehen in Mocha aus drei Ebenen. Die Oberste sind die Testsuites, welche weitere Testsuites oder Testfälle enthalten können. Testfälle bestehen aus funktionalem Code sowie Assertions als eigentliche Testüberprüfung. Es werden verschiedene Stile zur Testbeschreibung unterstützt: BDD, TDD, QUnit und weitere, welche sich nur in ihrem Aussehen unterscheiden und Entwicklern ermöglichen, ihren eigenen Stil zur Definition von Tests zu wählen.\cite{mocha-index}
 
-Für Assertions können in Mocha verschiedene Frameworks genutzt werden. In \cite{mocha-index} wird beispielsweise die Nutzung von \textit{should.js} bei Verwendung des BDD-Stils, \textit{expect.js} oder \textit{chai} (s. Abschnitt \ref{sec:Chai}) empfohlen. Es ist einem Entwickler somit möglich, Mocha auf die eigenen Vorlieben anzupassen.\cite{mocha-index}
 
-Auf eine genauere Vorstellung und Codebeispiele wird an dieser Stelle aufgrund der Vielseitigkeit verzichtet.
-\todo{Konfiguration, synchron-asynchron, Reporter, Src-Bsp}
-
-\subsubsection{QUnit}
-\label{sec:QUnit}
-QUnit ist ein Framework für automatisierte Komponententests mit JavaScript und wird von jQuery und einer Vielzahl weiterer Projekten genutzt. Es liegt unter \texttt{qunitjs} als Paket im npm-Repository. Es kann sowohl in Browsern als auch in Node.js ausgeführt werden.\cite{qunit-index}
-
-In QUnit geschriebene Tests ähneln denen vieler Testframeworks populärer anderer Sprachen, wie beispielsweise JUnit in Java. Ein Testfall wird mittels Aufruf von \texttt{QUnit.test(string, function)} definiert. In der übergebenen Funktion kann Testcode aufgerufen werden und das Ergebnis mit Assertions validiert werden. Wenn mindestens eine Assertion fehlschlägt, gilt der Test als fehlgeschlagen; sonst als bestanden. QUnit liefert Assertions mit: beispielsweise \texttt{assert.ok}, welche einen truthy Wert erwartet, oder \texttt{assert.equal}, welches zwei als gleich angesehene Werte erwartet.\cite{qunit-cookbook}
-
-Tests können in durch Aufruf von \texttt{QUnit.module(string)} erzeugten Modulen gruppiert werden (s. Listing \ref{lst:qunit-test}). In Modulen kann Code ausgelagert werden, indem die vor und nach jedem Test aufgerufenen Funktionen \texttt{beforeEach} und \texttt{afterEach} definiert werden.\cite{qunit-cookbook}
-
-\begin{figure}[H]
-	\lstinputlisting[caption={Beispiel mehrerer Tests für QUnit (adaptiert nach \cite{qunit-cookbook})}, label=lst:qunit-test]{lst/qunit-1.js}
-\end{figure}
 
 \subsubsection{PhantomJS}
 \label{sec:PhantomJS}
@@ -86,16 +140,20 @@ Für das Laden von Webseiten sind Page-Objekte zuständig, über welche eine URL
 
 Ein großer Nutzungsbereich von PhantomJS liegt im Testen von Webanwendungen; geeignet ist es beispielsweise für den Einsatz in Kommandozeilenumgebungen oder Continuous-Integration-Systemen. PhantomJS an sich ist kein Testframework, sondern dient der Ausführung eines beliebigen Testframeworks. Es existieren Frameworks welche speziell auf PhantomJS aufbauen und komfortable Funktionalitäten für Testzwecke zur Verfügung stellen: z.\,B. CasperJS (s. Abschnitt \ref{sec:CasperJS}) oder WebSpecter, welches sich allerdings noch in einer frühen Entwicklungsphase befindet.\cite{phantomjs-testing}
 
-\subsubsection{Chai}
-\label{sec:Chai}
-Chai ist eine Assertion-Bibliothek, welche mit jedem Testframework kombiniert werden kann. Chai bietet verschiedene Assertion-Stile, so dass der Entwickler seinen eigenen Stil wählen kann.\cite{chai-index} Chai ist unter der ID \texttt{chai} über npm verfügbar und kann so installiert und in Projekte eingebunden werden\cite{chai-installation}.
+\subsubsection{CasperJS}
+\label{sec:CasperJS}
+CasperJS ist ein Framework für Navigation und Test in PhantomJS. Es steht unter \texttt{casperjs} im npm-Repository zur Verfügung.\cite{casperjs-index} Trotz dessen ist es nicht unter Node.js lauffähig\cite{casperjs-faq}, sondern benötigt Python\cite{casperjs-installation}.
 
-Der Assert-Stil ähnelt klassischeren Testframeworks wie QUnit oder dem Assert-Modul in Node.JS. Über das \texttt{assert}-Objekt werden Funktionen zur Verfügung gestellt, zum Beispiel \texttt{isOk} zur Überprüfung, ob der Parameter truthy ist oder \texttt{equal} zur Überprüfung, ob die Parameter gleich sind. Jeder Funktion kann eine optionale Nachricht übergeben werden, welche im Falle eines Fehlschlags in der Fehlermeldung angezeigt wird.\cite{chai-assert}
-
-Der BDD-Stil wird in zwei Varianten zur Verfügung gestellt: \texttt{expect} und \texttt{should}. Er ermöglicht es Assertions in einer natursprachlichen Form zu schreiben, welche somit gut lesbar sind. Die should-Variante hat einige Nachteile, weshalb an dieser Stelle nur die expect-Variante betrachtet wird. \texttt{Expect} ist eine Funktion, welcher der zu überprüfende Wert übergeben wird. Diese Methode wird mit weiteren Objekten und Funktionen verkettet, um die Assertion zu bilden.\cite{chai-styles} Ein Beispiel hierzu findet sich in Listing \ref{lst:chai-expect}.
+Es ermöglicht die Erstellung von komplexen Navigationsszenarien unter Benutzung von High-Level-Funktionen. Hierzu werden u.\,a. die Funktionen \texttt{casper.start}, \texttt{casper.then}, \texttt{casper.thenOpen} und \texttt{casper.back} sequentiell aufgerufen. Das Szenario kann dann mittels \texttt{casper.run} aufgerufen werden und wird nacheinander abgearbeitet. Es stehen diverse Funktionen wie \texttt{casper.click}, \texttt{casper.fill} oder \texttt{casper.evaluate} zur DOM-Manipulation zur Verfügung. Für alle Browser-Operationen und DOM-Manipulationen wird als Browser PhantomJS genutzt, welcher von CasperJS gestartet wird. Die Ansteuerung von PhantomJS wird durch CasperJS vereinfacht, wodurch sich einfacher wartbarerer Code ergibt\cite{casperjs-better-phantomjs}. Ein beispielhaftes Navigationsszenario findet sich in Listing \ref{lst:casper-scenario}.\cite{casperjs-index}
 
 \begin{figure}[H]
-	\lstinputlisting[caption={Beispiel von Assertions mit dem expect-Stil von Chai (aus \cite{chai-styles})}, label=lst:chai-expect]{lst/chai-expect.js}
+	\lstinputlisting[caption={Beispiel eines Navigationsszenarios mit CasperJS (adaptiert nach \cite{casperjs-index})}, label=lst:casper-scenario]{lst/casper-scenario.js}
+\end{figure}
+
+CasperJS enthält auch ein einfaches Testframework. Ein Test wird durch Aufruf der Funktion \texttt{casper.test.begin} definiert und mit \texttt{test.done} beendet. Er gilt als erfolgreich, wenn er ohne fehlgeschlagene Assertions beendet wurde. Navigationsszenarien und Tests können verschachtelt werden, so dass mit CasperJS auch End-To-End-Tests durchgeführt werden können.\cite{casperjs-index, casperjs-test} Ein einfacher Test ist in Listing \ref{lst:casper-test} zu finden.
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel eines Tests mit CasperJS (aus \cite{casperjs-test})}, label=lst:casper-test]{lst/casper-test.js}
 \end{figure}
 
 
@@ -135,56 +193,4 @@ Die Funktionsweise basiert auf den Methoden \texttt{angular.mock.module}, welche
 Im Beispiel (s. Listing \ref{lst:ngMock}) wird das Module \texttt{app} geladen und die Services \texttt{SimpleService} und \texttt{\$log} in die Testfunktion injiziert. Dadurch kann ein Spy auf \texttt{\$log.info} gesetzt werden und hierdurch das korrekte Logging von \texttt{SimpleService.DoSomething} validiert werden.
 
 
-\subsubsection{Intern}
-\label{sec:Intern}
-Intern ist ein Framework für automatisierte Tests in JavaScript. Es bietet sowohl Möglichkeiten für Komponenten- als auch für End-To-End-Tests. Intern ist flexibel und bietet dem Entwickler Möglichkeiten, seinen eigenen Stil zu verfolgen. Es steht als Paket \texttt{intern} über npm zur Verfügung.\cite{intern-userguide}
 
-Intern stellt verschiedene Interfaces zur Definierung von Tests bereit; es können auch eigene definiert werden. Das \textit{Object}-Interface ist eine einzelne Funktion, welcher ein Objekt übergeben wird, welches alle definierten Tests enthält. In diesem Objekt werden außerdem Funktionen die vor oder nach jedem Test oder der Testsuite ausgeführt werden sollen definiert. Ein Beispiel findet sich in Listing \ref{lst:intern-object}.\cite{intern-userguide}
-
-\begin{figure}[H]
-	\lstinputlisting[caption={Beispiel einer Testsuite in Intern (aus \cite{intern-userguide})}, label=lst:intern-object]{lst/intern-object.js}
-\end{figure}
-
-Die Interfaces \textit{BDD} und \textit{TDD} ähneln einander und unterscheiden sich nur durch die Benennung einzelner Funktionen. Sie verfolgen gegenüber dem Object-Interface einen prozeduraleren Ansatz, basieren also auf verschachtelt aufgerufenen Funktionen statt auf Objekten. Auch hier können Funktionen definiert werden, welche vor oder nach jedem Test oder der Suite aufgerufen werden. Ein Beispiel ist in Listing \ref{lst:intern-bdd} zu finden.\cite{intern-userguide}
-
-\begin{figure}[H]
-	\lstinputlisting[caption={Beispiel einer Testsuite in Intern (aus \cite{intern-userguide})}, label=lst:intern-bdd]{lst/intern-bdd.js}
-\end{figure}
-
-Es steht ein Interface zur Verfügung, welches QUnit nachempfindet und somit die Verwendung von in QUnit geschriebenen Tests (s. Listing \ref{lst:qunit-test} in Abschnitt \ref{sec:QUnit}) in Intern ermöglicht. Für alle Tests gilt, dass ein Test fehlschlägt, wenn in ihm ein Error auftritt, also eine Assertion fehlschlägt. Ansonsten gilt er als bestanden. Die Chai-Bibliothek ist in Intern enthalten, es ist jedoch auch die Nutzung von beliebigen anderen Assertion-Frameworks möglich. Durch Aufruf der Funktion \texttt{skip} können Tests übersprungen werden.\cite{intern-userguide}
-
-End-To-End-Tests werden genau wie Unit-Tests definiert, werden jedoch in der Konfiguration in \texttt{functionalSuites} und nicht in \texttt{suites} aufgeführt. Hierdurch werden sie im Kontext des Test-Runners und nicht in der zu testenden Umgebung ausgeführt. Für die Interaktion mit dem Browser verwendet Intern mit \textit{leadfoot} einen Wrapper für Selenium. Über das in \texttt{this.remote} zur Verfügung gestellte Leadfoot-Command-Objekt können Befehle im Browser ausgeführt werden.\cite{intern-userguide}
-
-\begin{figure}[H]
-	\lstinputlisting[caption={Beispiel eines End-To-End-Tests in Intern (aus \cite{intern-userguide})}, label=lst:intern-e2e]{lst/intern-e2e.js}
-\end{figure}
-
-Im Beispiel in Listing \ref{lst:intern-e2e} wird ein Testfall \glqq greeting form\grqq{} definiert, in welchem die Index-Seite geladen wird und auf dieser in einem Eingabefeld der Wert \glqq Elaine\grqq{} eingegeben und der Submit-Button geklickt wird. Abschließend wird überprüft ob das Element mit der ID \glqq greeting\grqq{} den korrekten Inhalt enthält.
-
-Intern ermittelt standardmäßig beim Ausführen von Tests die Code Coverage, also die Abdeckung von Codezeilen, Funktionen, Zweigen und Anweisungen. Die Ausgabe sowohl von Code Coverage als auch der Testergebnisse ist konfigurierbar.\cite{intern-userguide}
-
-\subsubsection{AVA}
-\label{sec:Ava}
-AVA ist ein Test-Runner für in JavaScript geschriebene Tests. Die Besonderheit ist, dass die Tests simultan ausgeführt werden und somit deutliche Performanceverbesserungen möglich sind. Es steht unter \texttt{ava} im npm-Repository zur Verfügung.\cite{ava}
-
-AVA läuft ausschließlich in Node.js; es gibt also keine Möglichkeit den Test-Runner im Browser aufzurufen. Ein Test wird über Aufruf einer Funktion, welche aus dem Node-Modul \textit{ava} importiert wird, definiert. Dieser Funktion wird ein Funktionskörper übergeben, welcher den Test spezifiert und Assertions durchführt. Ein Beispiel findet sich in Listing \ref{lst:ava}. Die Assertion-Funktionen werden über das übergebene Testobjekt \texttt{t} bereitgestellt. Es ist nicht vorgesehen andere Assertionframeworks zu nutzen. Mit den Funktionen \texttt{before}, \texttt{after}, \texttt{beforeEach} und \texttt{afterEach} können Funktionen definiert werden, welche vor oder nach jedem Test oder einmalig allen Tests ausgeführt werden.\cite{ava}
-
-\begin{figure}[H]
-	\lstinputlisting[caption={Beispiel eines Tests mit AVA (adaptiert nacht \cite{ava})}, label=lst:ava]{lst/ava.js}
-\end{figure}
-
-\subsubsection{CasperJS}
-\label{sec:CasperJS}
-CasperJS ist ein Framework für Navigation und Test in PhantomJS. Es steht unter \texttt{casperjs} im npm-Repository zur Verfügung.\cite{casperjs-index} Trotz dessen ist es nicht unter Node.js lauffähig\cite{casperjs-faq}, sondern benötigt Python\cite{casperjs-installation}.
-
-Es ermöglicht die Erstellung von komplexen Navigationsszenarien unter Benutzung von High-Level-Funktionen. Hierzu werden u.\,a. die Funktionen \texttt{casper.start}, \texttt{casper.then}, \texttt{casper.thenOpen} und \texttt{casper.back} sequentiell aufgerufen. Das Szenario kann dann mittels \texttt{casper.run} aufgerufen werden und wird nacheinander abgearbeitet. Es stehen diverse Funktionen wie \texttt{casper.click}, \texttt{casper.fill} oder \texttt{casper.evaluate} zur DOM-Manipulation zur Verfügung. Für alle Browser-Operationen und DOM-Manipulationen wird als Browser PhantomJS genutzt, welcher von CasperJS gestartet wird. Die Ansteuerung von PhantomJS wird durch CasperJS vereinfacht, wodurch sich einfacher wartbarerer Code ergibt\cite{casperjs-better-phantomjs}. Ein beispielhaftes Navigationsszenario findet sich in Listing \ref{lst:casper-scenario}.\cite{casperjs-index}
-
-\begin{figure}[H]
-	\lstinputlisting[caption={Beispiel eines Navigationsszenarios mit CasperJS (adaptiert nach \cite{casperjs-index})}, label=lst:casper-scenario]{lst/casper-scenario.js}
-\end{figure}
-
-CasperJS enthält auch ein einfaches Testframework. Ein Test wird durch Aufruf der Funktion \texttt{casper.test.begin} definiert und mit \texttt{test.done} beendet. Er gilt als erfolgreich, wenn er ohne fehlgeschlagene Assertions beendet wurde. Navigationsszenarien und Tests können verschachtelt werden, so dass mit CasperJS auch End-To-End-Tests durchgeführt werden können.\cite{casperjs-index, casperjs-test} Ein einfacher Test ist in Listing \ref{lst:casper-test} zu finden.
-
-\begin{figure}[H]
-	\lstinputlisting[caption={Beispiel eines Tests mit CasperJS (aus \cite{casperjs-test})}, label=lst:casper-test]{lst/casper-test.js}
-\end{figure}
