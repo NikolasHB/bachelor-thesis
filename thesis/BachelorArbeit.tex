@@ -36,6 +36,10 @@
 % mehrseitige Tabellen ermöglichen
 \usepackage{longtable}
 
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{multirow}
 % Unterstützung für Schriftarten
 %\newcommand{\changefont}[3]{ 
 %\fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont}
@@ -175,6 +179,16 @@
 % Disable single lines at the end of a paragraph (Hurenkinder)
 \widowpenalty = 10000
 \displaywidowpenalty = 10000
+
+%\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{pifont}
+\newcommand*\rot{\rotatebox{90}}
+\newcommand*\ok{\cellcolor{green!35}\ding{51}}
+\newcommand*\nok{\cellcolor{red!35}\ding{55}}
+\usepackage{tablefootnote}
+\usepackage{tabularx}
+
 
 \begin{document}
 % hier werden die Trennvorschläge inkludiert
