@@ -7,14 +7,15 @@ An die auszuwählenden Frameworks oder Tools beziehungsweise eine Kombination Me
 	\item Es soll die Testausführung von Komponententests via Node.js sowie im Browser möglich sein.
 	\item Die Software muss unter Windows 7 funktionieren.
 	\item Es darf keine zusätzliche Software (beispielsweise Python) zur Ausführung erforderlich sein; lediglich Node.js ist zulässig, da dies über die Standardsoftwareverteilung der Commerzbank verfügbar ist\todo{quelle}.
-	\item Wenn die Software Node.js benötigt, muss sie mit Version \todo{node version..} lauffähig sein.
+	\item Wenn die Software Node.js benötigt, muss sie mit Version 6.9.2 lauffähig sein.
 	\item Die Software muss über npm installierbar sein.
 	\item Sie muss Open-Source und für den kommerziellen Einsatz freigegeben sein.
 	\item Sie soll aktiv gewartet und Fehler in ihr behoben werden.
-	\item Es muss mindestens der aktuelle Commerzbank-Standard, ECMA-262 5.1, unterstützt werden\cite[][10]{coba-programmierrichtlinienJavaScript}.
+	%\item Es muss mindestens der aktuelle Commerzbank-Standard, ECMA-262 5.1, unterstützt werden\cite[][10]{coba-programmierrichtlinienJavaScript}.
 	\item Gemäß SEF müssen Testfälle eindeutig beschrieben werden; diese Beschreibung auch kann durch Implementierung der Tests erfolgen\cite{coba-sef}. Das Testframework soll daher eine Beschreibung der Tests forcieren.
 	\item Der Testcode soll leicht lesbar sein\cite[][7]{coba-programmierrichtlinienAllgemein}; hierzu bietet sich der BDD-Stil an, den das Testframework somit unterstützen soll.
 	\item Die Software soll eine geringe Einarbeitungszeit erfordern und problemlos zu verwenden sein. 
+	\item Sie soll dem Entwickler eine Flexibilität bei der Formulierung der Testfallimplementationen und Assertions bieten, damit dieser möglichst nah an seinen persönlichen Präferenzen arbeiten kann.
 	\item Gemäß SEF sollen Komponententests \glqq einen möglichst großen Teil der Funktionalität abdecken\grqq{}\cite{coba-sef}. Zur Überprüfung dessen muss eine Möglichkeit zur Ermittlung der Code Coverage bestehen.
 	\item Die Ausgabe der Testergebnisse muss konfigurierbar sein, um sie gegebenenfalls in Prozessen oder anderen Tools der Commerzbank weiterverwenden zu können.
 	\item Bei der Durchführung von End-To-End-Tests soll es möglich sein, die Ergebnisse mit Screenshots zu dokumentieren.
@@ -26,9 +27,9 @@ An die auszuwählenden Frameworks oder Tools beziehungsweise eine Kombination Me
 \input{3_software}
 
 \subsection{Auswahlentscheidung}
-Für die Entscheidungsfindung wird eine Entscheidungsmatrix erstellt, in welcher die Anforderungen gegen die gefundene Software abgeglichen werden. Ein grüner Haken steht für ein Erfüllen der Anforderung; ein rotes Kreuz für einen Widerspruch. Eine leere Zelle bedeutet, dass die Anforderung bei dieser Software nicht relevant ist, da sie weder positiv noch negativ beeinträchtigt wird. Eine Anforderung wird von der ausgewählten Softwaremenge erfüllt, wenn keine Einzelsoftware der Anforderung widerspricht.
+Für die Entscheidungsfindung wird eine Entscheidungsmatrix (s. Tabelle \ref{tbl:entscheidungsmatrix}) erstellt, in welcher die Anforderungen gegen die gefundene Software abgeglichen werden. Ein grüner Haken steht für ein Erfüllen der Anforderung; ein rotes Kreuz für einen Widerspruch. Eine leere Zelle bedeutet, dass die Anforderung bei dieser Software nicht relevant ist, da sie weder positiv noch negativ beeinträchtigt wird. Eine Anforderung wird von der ausgewählten Softwaremenge erfüllt, wenn keine Einzelsoftware der Anforderung widerspricht.
 
-Zur Erfüllung von Anforderung 1 werden ein Testrunner sowie eine Assertion-Bibliothek benötigt; zur Erfüllung von Anforderung 2 ein Tool zur Browsersteuerung und eine Assertion-Bibliothek. Hierzu werden die gefundenen Softwares \todo{?} kategorisiert. Die endgültig ausgewählte Softwaremenge muss mindestens ein Exemplar jeder Kategorie enthalten, damit die Anforderungen 1 und 2 erfüllt werden.
+Zur Erfüllung von Anforderung 1 werden ein Testrunner, ein Framework zum Anlegen und Beschreiben der Testfälle sowie eine Assertion-Bibliothek benötigt; zur Erfüllung von Anforderung 2 zusätzlich ein Tool zur Browsersteuerung. Hierzu werden die gefundenen Softwares \todo{?} kategorisiert. Die endgültig ausgewählte Softwaremenge muss mindestens ein Exemplar jeder Kategorie enthalten, damit die Anforderungen 1 und 2 erfüllt werden.
 
 %\begin{table}[H] \centering
 	%\begin{tabular}{@{} cl*{11}c @{}}
@@ -38,41 +39,54 @@ Zur Erfüllung von Anforderung 1 werden ein Testrunner sowie eine Assertion-Bibl
 	%\end{tabular}
 	\begin{tabularx}{\textwidth}{rX|cccccccccccc}
 		&& \multicolumn{12}{c}{Software} \\ &&  \rot{Karma} & \rot{Mocha} & \rot{AVA} & \rot{QUnit} & \rot{Intern} & \rot{Jasmine} & \rot{Chai} & \rot{Protractor} & \rot{PhantomJS} & \rot{CasperJS} & \rot{Sinon} & \rot{ngMock} \\ \hline
-		%							Ka		Mo		Av		QU		In		Ja		Ch		Pr		Ph		Ca		Si		ng
-	    &	Testrunner 				& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& 		& 		&		& \ok	&		&  \\
-	    &	End-To-End				& 		&		&		&		& \ok	&		&		& \ok	& \ok	& \ok	&		&  \\
-	    &	Assertion				& 		&		& \ok	& \ok	& \ok	& \ok	& \ok	& 		& 		& \ok	& 		&  \\\hline
+		%									Ka		Mo		Av		QU		In		Ja		Ch		Pr		Ph		Ca		Si		ng
+	    &	\footnotesize{Testrunner}	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& 		& 		&		& \ok	&		&  \\
+	    &	\footnotesize{Testfallbeschreibung}
+							    		&		& \ok	& \ok	& \ok	& \ok	& \ok	&		&		&		& \ok	&		& \\
+	    &	\footnotesize{End-To-End}	
+									    & 		&		&		&		& \ok	&		&		& \ok	& \ok	& \ok	&		&  \\
+	    &	\footnotesize{Assertion}	& 		&		& \ok	& \ok	& \ok	& \ok	& \ok	& 		& 		& \ok	& 		&  \\\hline\hline
 	    
-	    3 &	AngularJS-Support	& \ok	& \ok	& \nok\footnote{\url{https://github.com/angular/angular.js/issues/13971}}
-														& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok
+	    3 &	\footnotesize{AngularJS-Support}	
+									    & \ok	& \ok	& \nok\footnote{\url{https://github.com/angular/angular.js/issues/13971}}
+																& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok
 																											    & \ok	& \ok \\
-		4 & Testausführung		& \nok	& \ok	& \nok  & \ok	& \ok	& \ok	& 		&		&		& \nok	&		& \\
-		5 &	Windows 7			& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok \\
-		6 & benötigte Software	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok 	& \ok\footnote{Zur Ausführung wird zwar Selenium benötigt, dies wird aber automatisiert mitinstalliert und ist daher ok.}
-																								& \ok	& \nok	& \ok	& \ok \\
-		7 & Node.js 9.6.2		& \ok	& \ok	& \ok 	& \ok	& \ok	& \ok	& \ok	& \ok	&  \ok	& \ok	& \ok	& \ok \\
+		4 & \footnotesize{Testausführung}		& \nok	& \ok	& \nok  & \ok	& \ok	& \ok	& 		&		&		& \nok	&		& \\
+		5 &	\footnotesize{Windows 7}			& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok \\
+		6 & \footnotesize{benötigte Software}	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok 	& \ok\footnote{Zur Ausführung wird zwar Selenium benötigt, dies wird aber automatisiert mitinstalliert und ist daher ok.}
+																										& \ok	& \nok	& \ok	& \ok \\
+		7 & \footnotesize{Node.js 9.6.2}		& \ok	& \ok	& \ok 	& \ok	& \ok	& \ok	& \ok	& \ok	&  \ok	& \ok	& \ok	& \ok \\
 		
-		8 & npm					& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \nok	& \ok	& \ok	& \ok \\
-		9 & Open Source \& kommerz.
-								& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok \\
-		10 & Wartung\footnote{Zur Auswertung dieser Anforderung wird das jeweilige Github-Repository herangezogen.}
-								& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \nok\footnote{1.841 offene Issues; 2 Issues geschlossen in der letzten Woche\cite{phantomjs-issues,phantomjs-pulse}}
-																										& \ok	& \ok	& \ok \\ 
-		11 & \textbf{ECMA-262 5.1}		& 		& \ok	&		&		&		&		& \ok	&		&		&		&		& \\
-		12 & Forcierte Beschreibung
-								&		& \ok	& \nok	& \ok	& \ok	& \ok	& 		& 		&		& \ok	& 		& \\
-		13 & BDD-Stil			&		& \ok	& \nok	& \nok	& \ok	& \ok	& \ok	&		&		& \nok	&		& \\
-		14 & Einarbeitung und Verwendung
-								& \ok	& \ok	& \ok	& \ok	& \nok\footnote{Warten auf asynchrone AngularJS-Komponenten muss bei End-To-End-Tests manuell implementiert werden.}
-																		& \ok	& \ok	& \ok	& \ok	& \nok\footnote{Warten auf asynchrone AngularJS-Komponenten muss manuell implementiert werden.}
+		8 & \footnotesize{npm}					& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \nok	& \ok	& \ok	& \ok \\
+		9 & \footnotesize{Open Source \& kommerziell}
+										& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok \\
+		10 & \footnotesize{Wartung\footnote{Zur Auswertung dieser Anforderung wird das jeweilige Github-Repository herangezogen.}}
+										& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \nok\footnote{1.841 offene Issues; 2 Issues geschlossen in der letzten Woche\cite{phantomjs-issues,phantomjs-pulse}}
+																											& \ok	& \ok	& \ok \\ 
+		%11 & \textbf{ECMA-262 5.1}		& 		& \ok	&		&		&		&		& \ok	&		&		&		&		& \\
+		11 & \footnotesize{Forcierte Beschreibung}
+										&		& \ok	& \nok	& \ok	& \ok	& \ok	& 		& 		&		& \ok	& 		& \\
+		12 & \footnotesize{BDD-Stil}	&		& \ok	& \nok	& \nok	& \ok	& \ok	& \ok	&		&		& \nok	&		& \\
+		13 & \footnotesize{Einarbeitung \& Verwendung}
+										& \ok	& \ok	& \ok	& \ok	& \nok\footnote{Warten auf asynchrone AngularJS-Komponenten muss bei End-To-End-Tests manuell implementiert werden.}
+																				& \ok	& \ok	& \ok	& \ok	& \nok\footnote{Warten auf asynchrone AngularJS-Komponenten muss manuell implementiert werden.}
 																												& \ok	& \ok \\
-		15 & Code-Coverage		& \ok	& \ok	& \ok	& \nok	& \ok	&		&		&		&		&		&		& \\ 
-		16 & Ausgabe-Konfiguration
-								& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	&		&		& 		& \nok	&		& \\
-		17 & Screenshots		&		&		&		&		& \nok	&		&		& \ok	& \ok	& \ok	&		& \\
-		18 & Spies, Stubs, Mocks
-								&		&		&		&		&		&		&		&		&		& 		& \ok	& \ok \\
-		19 & keine proprietären Dateien
-								& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok						
+		14 & \footnotesize{Flexibilität}& 		& \ok	& \nok	& \nok	& \ok	& \nok	& 		&		&		& \nok	&		& \\
+		15 & \footnotesize{Code-Coverage}		
+										& \ok	& \ok	& \ok	& \nok	& \ok	&		&		&		&		&		&		& \\ 
+		16 & \footnotesize{Ausgabe-Konfiguration}
+										& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	&		&		& 		& \nok	&		& \\
+		17 & \footnotesize{Screenshots}	&		&		&		&		& \nok	&		&		& \ok	& \ok	& \ok	&		& \\
+		18 & \footnotesize{Spies, Stubs, Mocks}
+										&		&		&		&		&		&		&		&		&		& 		& \ok	& \ok \\
+		19 & \footnotesize{keine proprietären Dateien}
+										& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok						
 	\end{tabularx}
+	\captionof{table}{Entscheidungsmatrix zur Softwareauswahl\label{tbl:entscheidungsmatrix}}
+	
+	Die Auswertung der Entscheidungsmatrix zeigt eine klare Softwareauswahl, mit welcher die Anforderungen vollständig abgedeckt werden können. Als Framework zur Testfallbeschreibung sowie als Testrunner wird Mocha eingesetzt, welches neben Intern von allen betrachteten Frameworks die höchste Flexibilität mit sich bringt. Die Kombination mit der Assertionbibliothek Chai, welche sich aus der Matrix ergibt, wird von \textcite{mocha-index} bereits in der Softwaredokumentation aufgeführt, wodurch hier von einem problemlosen Zusammenarbeiten auszugehen ist.
+	
+	Für die Realisierung von End-To-End-Tests wird auf das vom AngularJS-Team entwickelte Protractor zurückgegriffen und somit auch der Empfehlung aus der offiziellen AngularJS-Dokumentation \cite{angular-e2e} gefolgt. Die abweichende Kombination von Protractor mit Mocha und Chai, statt Jasmine, wird von vielen Entwicklern genutzt und unter Anderem in \cite{protractormocha-1} und \cite{protractormocha-2} beschrieben, so dass auch hier von keinen Problemen auszugehen ist.
+	
+	Für die Realisierung von Spies, Stubs und Mocks in Komponententests wird auf Sinon und ngMock gesetzt.
 %\end{table}
