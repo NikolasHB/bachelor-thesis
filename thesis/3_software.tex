@@ -1,5 +1,5 @@
 \subsection{Softwarerecherche}
-Einen Überblick über zur Verfügung stehende Tools bieten \cite{unittest-overview} und Weitere.
+Einen Einstiegspunkt und ersten Überblick über zur Verfügung stehende Tools bietet \cite{unittest-overview}.
 
 \subsubsection{Karma}
 \label{sec:Karma}
@@ -21,7 +21,13 @@ Die Funktionalität von Karma lässt sich mit Plugins erweitern. Sie werden für
 \label{sec:Mocha}
 Mocha ist ein Testframework und Test-Runner, welches sowohl in Node.js als auch in Browsern lauffähig ist. Es liegt als Paket \texttt{mocha} im npm-Repository und kann darüber installiert werden.\cite{mocha-index}
 
-Tests bestehen in Mocha aus drei Ebenen. Die Oberste sind die Testsuites, welche weitere Testsuites oder Testfälle enthalten können. Testfälle bestehen aus funktionalem Code sowie Assertions als eigentliche Testüberprüfung. Es werden verschiedene Stile zur Testbeschreibung unterstützt: BDD, TDD, QUnit und weitere, welche sich nur in ihrem Aussehen unterscheiden und Entwicklern ermöglichen, ihren eigenen Stil zur Definition von Tests zu wählen.\cite{mocha-index}
+Tests bestehen in Mocha aus drei Ebenen. Die Oberste sind die Testsuites, welche weitere Testsuites oder Testfälle enthalten können. Für jeden Testsuite und jeder Testfall muss ein Name vergeben werden, durch welchen der Test beschrieben wird. Testfälle bestehen aus funktionalem Code sowie Assertions als eigentliche Testüberprüfung. Es werden verschiedene Stile zur Testbeschreibung unterstützt: BDD, TDD, QUnit (s. Listing \ref{lst:qunit-test} in Abschnitt \ref{sec:QUnit}) und weitere, welche sich nur in ihrem Aussehen unterscheiden und Entwicklern ermöglichen, ihren eigenen Stil zur Definition von Tests zu wählen.\cite{mocha-index}
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispiel eines Tests mit dem BDD-Stil in Mocha (adaptiert nach \cite{mocha-index})}, label=lst:mocha-bdd]{lst/mocha-bdd.js}
+\end{figure}
+
+In Listing \ref{lst:mocha-bdd} findet sich ein beispielhafter definierter Test unter Verwendung des BDD-Stils. Die Funktionen \texttt{describe} und \texttt{context} definieren Testsuites; sie unterscheiden sich nur zwecks besserer semantischer Lesbarkeit des Tests. Beim TDD-Stil werden stattdessen die Funktionen \texttt{suite} und \texttt{test} zur Definition von Testsuites bzw. -fällen verwendet.\cite{mocha-index}
 
 Für Assertions können in Mocha verschiedene Frameworks genutzt werden. In \cite{mocha-index} wird beispielsweise die Nutzung von \textit{should.js} bei Verwendung des BDD-Stils, \textit{expect.js} oder \textit{chai} (s. Abschnitt \ref{sec:Chai}) empfohlen. Es ist einem Entwickler somit möglich, Mocha auf die eigenen Vorlieben anzupassen.\cite{mocha-index} Auf eine genauere Vorstellung und Codebeispiele wird an dieser Stelle aufgrund der Vielseitigkeit verzichtet.
 
@@ -80,19 +86,17 @@ Intern ermittelt standardmäßig beim Ausführen von Tests die Code Coverage, al
 
 \subsubsection{Jasmine}
 \label{sec:Jasmine}
-Jasmine ist ein Behavior Driven Development Framework zum Test von JavaScript\cite{jasmine-introduction}. Es liegt unter \texttt{jasmine} im npm-Repository\cite{jasmine-getting-started}. Jasmine bietet eine saubere und einfache Syntax zur Beschreibung von Testfällen. Die Tests bestehen aus drei Ebenen: Testsuites, Spezifizierungen (\glqq Specs\grqq) und Erwartungen, also den eigentlichen Testassertions\cite{jasmine-introduction}. Ein beispielhafter Test findet sich in Listing \ref{lst:jasmine-1}.
+Jasmine ist ein BDD-Testframework und Test-Runner\cite{jasmine-introduction}. Es liegt unter \texttt{jasmine} im npm-Repository\cite{jasmine-getting-started}. Jasmine bietet eine saubere und einfache Syntax zur Beschreibung von Testfällen. Die Tests bestehen aus drei Ebenen: Testsuites, Spezifizierungen (\glqq Specs\grqq) und Erwartungen, also den eigentlichen Testassertions\cite{jasmine-introduction}. Ein beispielhafter Test findet sich in Listing \ref{lst:jasmine-1}.
 
-Eine Testsuite beginnt auf oberster Ebene mit dem Aufruf der globalen JavaScript-Funktion \texttt{describe(string, function)}. Der String ist hierbei der Name der Testsuite, üblicherweise wird hier das Testsubjekt benannt. Die Funktion implementiert die Testsuite und besteht aus Specs.\cite{jasmine-introduction}
+Eine Testsuite beginnt auf oberster Ebene mit dem Aufruf der globalen JavaScript-Funktion \texttt{describe}, wobei ein beschreibender String und eine Funktion zur Implementierung der Suite übergeben wird.\cite{jasmine-introduction}
 
-Ein Spec wird durch Aufruf der globalen Funktion \texttt{it(string, function)} angelegt. Der String enthält eine Beschreibung des Testfalls; nach dem BDD-Modell also eine Beschreibung des erwarteten Verhaltens. Die Funktion dient zum Überprüfen dieses Verhaltens und enthält Assertions, welche entweder \texttt{true} oder \texttt{false} ergeben. Liefern alle Assertions \texttt{true} so gilt die Spec als bestanden, ansonsten als durchgefallen.\cite{jasmine-introduction}
+Testsuites enthalten eine beliebige Menge von Specs, welche durch Aufruf der globalen Funktion \texttt{it} angelegt werden. Ein zu übergebender String enthält eine Beschreibung des Testfalls; nach dem BDD-Modell also eine Beschreibung des erwarteten Verhaltens. Die Funktion dient zum Überprüfen dieses Verhaltens und enthält Assertions.\cite{jasmine-introduction}
 
-Eine Assertion besteht in Jasmine aus der Funktion \texttt{expect(object)}, welcher der tatsächliche Wert übergeben wird. Diese wird mit einer Matcher-Funktion verkettet, welche den erwarteten Wert übergeben bekommt und die beiden Werte vergleicht und auswertet. Es wird eine Vielzahl an vorgefertigten Matchern mitgeliefert: \texttt{toEqual}, \texttt{toContain}, \texttt{toBeTruthy}, und Weitere\cite{jasmine-introduction, jasmine-cheatsheet}.
+Eine Assertion besteht in Jasmine aus der Funktion \texttt{expect}, welcher der tatsächliche Wert übergeben wird. Diese wird mit einer Matcher-Funktion verkettet, welche den erwarteten Wert übergeben bekommt und die beiden Werte vergleicht und auswertet. Es wird eine Vielzahl an vorgefertigten Matchern mitgeliefert: \texttt{toEqual}, \texttt{toContain}, \texttt{toBeTruthy} und Weitere\cite{jasmine-introduction, jasmine-cheatsheet}.
 
 \begin{figure}[H]
 	\lstinputlisting[caption={Beispiel einer Jasmine-Testsuite (adaptiert nach \cite{jasmine-introduction})}, label=lst:jasmine-1]{lst/jasmine-1.js}
 \end{figure}
-
-Specs können als \textit{pending} deklariert werden. Sie werden dann nicht ausgeführt, aber im Ergebnis angezeigt. Hierfür kann beim Aufruf der \texttt{it}-Funktion die Übergabe einer Funktion weggelassen werden, stattdessen die \texttt{xit}-Funktion aufgerufen werden oder im Funktionskörper die \texttt{pending}-Funktion genutzt werden.\cite{jasmine-introduction}
 
 \subsubsection{Chai}
 \label{sec:Chai}
@@ -110,8 +114,6 @@ Der BDD-Stil wird in zwei Varianten zur Verfügung gestellt: \texttt{expect} und
 \label{sec:Protractor}
 Protractor ist ein speziell für Angular-Anwendungen entwickeltes Framework für End-to-End-Tests. Die Tests werden in Browsern direkt gegen die Anwendungsoberfläche durchgeführt und simulieren somit das Verhalten eines echten Benutzers. Es liegt im npm-Repository mit der ID \texttt{protractor} und ist dadurch einfach zu installieren.\cite{protractor-index}
 
-Für die Steuerung des Browsers greift Protractor auf Selenium zurück\cite{protractor-index}, welches den W3C WebDriver-Standard implementiert und als Proxyserver zwischen Protractor und dem Browser agiert\cite{selenium}. Selenium unterstützt alle großen Webbrowser: aktuell die aktuellsten Versionen von Firefox, Internet Explorer ab Version 7, Safari ab Version 5.1, Opera und Chrome\cite{selenium-browsers}. Vom Einsatz von PhantomJS (s. Abschnitt \ref{sec:PhantomJS}) zusammen mit Protractor wird ausdrücklich abgeraten, da es hier Berichten zufolge häufig zu Abstürzen und abweichendem Verhalten kommt\cite{protractor-browser}. Laut eigener Aussage wird Selenium automatisch zusammen mit Protractor installiert und ist nach Aufruf von \texttt{webdriver-manager update} und \texttt{webdriver-manager start} ohne weitere Konfiguration lauffähig\cite{protractor-index}.
-
 Protractor nutzt als Framework für die Testbeschreibung standardmäßig Jasmine (s. Abschnitt \ref{sec:Jasmine}), unterstützt out-of-the-box aber auch Mocha (s. Abschnitt \ref{sec:Mocha}). Die nachfolgenden Beispiele nutzen daher auch Jasmine. Das eingesetzte Testframework, die Adresse unter welcher der Selenium-Server angesprochen wird, Testdateien, Timeouts, für den Test zu verwendende Browser und weitere Feineinstellungen werden in einer Konfigurationsdatei (s. Listing \ref{lst:protractor-conf}) konfiguriert.
 
 \begin{figure}[H]
@@ -124,7 +126,7 @@ Protractor nutzt als Framework für die Testbeschreibung standardmäßig Jasmine
 	\lstinputlisting[caption={Beispiel einer Spec für Protractor (aus \cite{protractor-tutorial})}, label=lst:protractor-spec]{lst/protractor.spec.js}
 \end{figure}
 
-
+Für die Steuerung des Browsers greift Protractor auf Selenium zurück\cite{protractor-index}, welches den W3C WebDriver-Standard implementiert und als Proxyserver zwischen Protractor und dem Browser agiert\cite{selenium}. Selenium unterstützt alle großen Webbrowser: aktuell die aktuellsten Versionen von Firefox, Internet Explorer ab Version 7, Safari ab Version 5.1, Opera und Chrome\cite{selenium-browsers}. Vom Einsatz von PhantomJS (s. Abschnitt \ref{sec:PhantomJS}) zusammen mit Protractor wird ausdrücklich abgeraten, da es hier Berichten zufolge häufig zu Abstürzen und abweichendem Verhalten kommt\cite{protractor-browser}. Laut eigener Aussage wird Selenium automatisch zusammen mit Protractor installiert und ist nach Aufruf von \texttt{webdriver-manager update} und \texttt{webdriver-manager start} ohne weitere Konfiguration lauffähig\cite{protractor-index}.
 
 
 
@@ -132,13 +134,13 @@ Protractor nutzt als Framework für die Testbeschreibung standardmäßig Jasmine
 \label{sec:PhantomJS}
 PhantomJS ist ein skriptbarer WebKit-Browser ohne Benutzeroberfläche und ist über eine JavaScript-API ansteuerbar. Er bietet native Unterstützung für Webstandards wie DOM, CSS-Selektoren, JSON, HTML-Canvas und SVG.\cite{phantomjs-index} PhantomJS steht nicht als npm-Paket zur Verfügung, sondern lässt sich lediglich als Binary installierten\cite{phantomjs-faq}. PhantomJS ist auch eine Laufzeitumgebung für JavaScript, so dass für ihn bestimmte Skripte nicht in Node.js ausgeführt werden können, sondern nur in PhantomJS\cite{phantomjs-quickstart}.
 
+Ein großer Nutzungsbereich von PhantomJS liegt im Testen von Webanwendungen; geeignet ist es beispielsweise für den Einsatz in Kommandozeilenumgebungen oder Continuous-Integration-Systemen. PhantomJS an sich ist kein Testframework, sondern dient der Ausführung eines beliebigen Testframeworks. Es existieren Frameworks welche speziell auf PhantomJS aufbauen und komfortable Funktionalitäten für Testzwecke zur Verfügung stellen: z.\,B. CasperJS (s. Abschnitt \ref{sec:CasperJS}) oder WebSpecter, welches sich allerdings noch in einer frühen Entwicklungsphase befindet.\cite{phantomjs-testing}
+
 Für das Laden von Webseiten sind Page-Objekte zuständig, über welche eine URL geladen werden kann, Screenshots gespeichert werden können oder auf DOM-Eigenschaften zugegriffen werden kann. Ein Beispiel findet sich in Listing \ref{lst:phantomjs}. JavaScript-Code kann im Kontext einer geladenen Seite mit der \texttt{evaluate}-Funktion ausgeführt werden; die Ausführung erfolgt in einer Sandbox und kann somit nicht auf Objekte, Variablen oder Funktionen außerhalb des Kontexts zugreifen.\cite{phantomjs-quickstart}
 
 \begin{figure}[H]
 	\lstinputlisting[caption={Beispiel eines Seitenaufrufs mit PhantomJS (aus \cite{phantomjs-quickstart})}, label=lst:phantomjs]{lst/phantom.js}
 \end{figure}
-
-Ein großer Nutzungsbereich von PhantomJS liegt im Testen von Webanwendungen; geeignet ist es beispielsweise für den Einsatz in Kommandozeilenumgebungen oder Continuous-Integration-Systemen. PhantomJS an sich ist kein Testframework, sondern dient der Ausführung eines beliebigen Testframeworks. Es existieren Frameworks welche speziell auf PhantomJS aufbauen und komfortable Funktionalitäten für Testzwecke zur Verfügung stellen: z.\,B. CasperJS (s. Abschnitt \ref{sec:CasperJS}) oder WebSpecter, welches sich allerdings noch in einer frühen Entwicklungsphase befindet.\cite{phantomjs-testing}
 
 \subsubsection{CasperJS}
 \label{sec:CasperJS}
@@ -192,5 +194,9 @@ Die Funktionsweise basiert auf den Methoden \texttt{angular.mock.module}, welche
 
 Im Beispiel (s. Listing \ref{lst:ngMock}) wird das Module \texttt{app} geladen und die Services \texttt{SimpleService} und \texttt{\$log} in die Testfunktion injiziert. Dadurch kann ein Spy auf \texttt{\$log.info} gesetzt werden und hierdurch das korrekte Logging von \texttt{SimpleService.DoSomething} validiert werden.
 
+\subsubsection{Istanbul}
+Istanbul ist ein Tool zur Ermittlung der Code-Coverage bei JavaScript-Ausführungen. Es ist als \texttt{nyc} im npm-Repository verfügbar.\cite{istanbul}
 
+Der Aufruf von Istanbul erfolgt durch Voranstellung des Befehls \texttt{nyc} vor den eigentlichen Aufruf des Test-Befehls (z.\,B. \texttt{nyc mocha} zur Ermittlung der Code-Coverage bei einem Mocha-Aufruf). Istanbul bestimmt dann bei Ausführung die Zeilen-, Statement-, Funktions- und Zweigabdeckung für jede einzelne JavaScript-Datei. Das Ausgabeformat ist konfigurierbar und somit an die individuellen Bedürfnisse anpassbar.\cite{istanbul}
 
+Istanbul unterstützt ES5, ES6, ES2015+ und laut eigener Aussage die meisten Testframeworks. Explizit genannt werden tap, Mocha (s. Abschnitt \ref{sec:Mocha}) und AVA (s. Abschnitt \ref{sec:Ava})\cite{istanbul}, es wird jedoch auch Karma (vgl. \cite{istanbul-karma}) unterstützt.

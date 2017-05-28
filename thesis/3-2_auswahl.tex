@@ -23,13 +23,20 @@ An die auszuwählenden Frameworks oder Tools beziehungsweise eine Kombination Me
 	\item Das Bearbeiten aller Dateien in der TFS-Quellcodeverwaltung soll möglich sein, es dürfen somit keine proprietären Binärdateien zum Einsatz kommen.
 \end{enumerate}
 
-
+\newpage
 \input{3_software}
 
+\newpage
 \subsection{Auswahlentscheidung}
 Für die Entscheidungsfindung wird eine Entscheidungsmatrix (s. Tabelle \ref{tbl:entscheidungsmatrix}) erstellt, in welcher die Anforderungen gegen die gefundene Software abgeglichen werden. Ein grüner Haken steht für ein Erfüllen der Anforderung; ein rotes Kreuz für einen Widerspruch. Eine leere Zelle bedeutet, dass die Anforderung bei dieser Software nicht relevant ist, da sie weder positiv noch negativ beeinträchtigt wird. Eine Anforderung wird von der ausgewählten Softwaremenge erfüllt, wenn keine Einzelsoftware der Anforderung widerspricht.
 
 Zur Erfüllung von Anforderung 1 werden ein Testrunner, ein Framework zum Anlegen und Beschreiben der Testfälle sowie eine Assertion-Bibliothek benötigt; zur Erfüllung von Anforderung 2 zusätzlich ein Tool zur Browsersteuerung. Hierzu werden die gefundenen Softwares \todo{?} kategorisiert. Die endgültig ausgewählte Softwaremenge muss mindestens ein Exemplar jeder Kategorie enthalten, damit die Anforderungen 1 und 2 erfüllt werden.
+
+Die Auswertung der Entscheidungsmatrix (s. Tabelle \ref{tbl:entscheidungsmatrix} auf der Folgeseite) zeigt klar eine Softwareauswahl, mit welcher die Anforderungen vollständig abgedeckt werden können. Als Framework zur Testfallbeschreibung sowie als Testrunner wird Mocha eingesetzt, welches neben Intern von allen betrachteten Frameworks die höchste Flexibilität mit sich bringt. Die Kombination mit der Assertionbibliothek Chai, welche sich aus der Matrix ergibt, wird von \textcite{mocha-index} bereits in der Softwaredokumentation aufgeführt, wodurch hier von einem problemlosen Zusammenarbeiten auszugehen ist. Für die Ermittlung der Code-Coverage wird Istanbul eingesetzt; die Kombination des Einsatzes mit Mocha wird in \cite{istanbul} explizit empfohlen, so dass auch hier von keinerlei Problemen auszugehen ist.
+
+Für die Realisierung von End-To-End-Tests wird auf das vom AngularJS-Team entwickelte Protractor zurückgegriffen und somit auch der Empfehlung aus der offiziellen AngularJS-Dokumentation \cite{angular-e2e} gefolgt. Die abweichende Kombination von Protractor mit Mocha und Chai, statt Jasmine, wird von vielen Entwicklern genutzt und unter Anderem in \cite{protractormocha-1} und \cite{protractormocha-2} beschrieben, so dass auch hier von keinen Problemen auszugehen ist.
+
+Für die Realisierung von Spies, Stubs und Mocks in Komponententests wird auf Sinon und ngMock gesetzt.
 
 %\begin{table}[H] \centering
 	%\begin{tabular}{@{} cl*{11}c @{}}
@@ -37,56 +44,69 @@ Zur Erfüllung von Anforderung 1 werden ein Testrunner, ein Framework zum Anlege
 	%	& \textit{1a} - Komponententest & \OK & \OK & \OK & \OK & \OK & \OK & & & & & &  \\
 	%	
 	%\end{tabular}
-	\begin{tabularx}{\textwidth}{rX|cccccccccccc}
-		&& \multicolumn{12}{c}{Software} \\ &&  \rot{Karma} & \rot{Mocha} & \rot{AVA} & \rot{QUnit} & \rot{Intern} & \rot{Jasmine} & \rot{Chai} & \rot{Protractor} & \rot{PhantomJS} & \rot{CasperJS} & \rot{Sinon} & \rot{ngMock} \\ \hline
-		%									Ka		Mo		Av		QU		In		Ja		Ch		Pr		Ph		Ca		Si		ng
-	    &	\footnotesize{Testrunner}	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& 		& 		&		& \ok	&		&  \\
+	\begin{tabularx}{\textwidth}{@{}r@{\hskip 6pt}X|ccccccccccccc}
+		&& \multicolumn{12}{c}{Software} \\ &&  \rot{Karma} & \rot{Mocha} & \rot{AVA} & \rot{QUnit} & \rot{Intern} & \rot{Jasmine} & \rot{Chai} & \rot{Protractor} & \rot{PhantomJS} & \rot{CasperJS} & \rot{Sinon} & \rot{ngMock} & \rot{Istanbul} \\ \hline
+		%									Ka		Mo		Av		QU		In		Ja		Ch		Pr		Ph		Ca		Si		ng		Is
+	    &	\footnotesize{Testrunner}	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& 		& 		&		& \ok	&		&  		&\\
 	    &	\footnotesize{Testfallbeschreibung}
-							    		&		& \ok	& \ok	& \ok	& \ok	& \ok	&		&		&		& \ok	&		& \\
+							    		&		& \ok	& \ok	& \ok	& \ok	& \ok	&		&		&		& \ok	&		& 		&\\
 	    &	\footnotesize{End-To-End}	
-									    & 		&		&		&		& \ok	&		&		& \ok	& \ok	& \ok	&		&  \\
-	    &	\footnotesize{Assertion}	& 		&		& \ok	& \ok	& \ok	& \ok	& \ok	& 		& 		& \ok	& 		&  \\\hline\hline
+									    & 		&		&		&		& \ok	&		&		& \ok	& \ok	& \ok	&		&  		&\\
+	    &	\footnotesize{Assertion}	& 		&		& \ok	& \ok	& \ok	& \ok	& \ok	& 		& 		& \ok	& 		&  		&\\\hline\hline
 	    
-	    3 &	\footnotesize{AngularJS-Support}	
+	    \footnotesize{3}
+	     &	\footnotesize{AngularJS-Support}	
 									    & \ok	& \ok	& \nok\footnote{\url{https://github.com/angular/angular.js/issues/13971}}
 																& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok
-																											    & \ok	& \ok \\
-		4 & \footnotesize{Testausführung}		& \nok	& \ok	& \nok  & \ok	& \ok	& \ok	& 		&		&		& \nok	&		& \\
-		5 &	\footnotesize{Windows 7}			& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok \\
-		6 & \footnotesize{benötigte Software}	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok 	& \ok\footnote{Zur Ausführung wird zwar Selenium benötigt, dies wird aber automatisiert mitinstalliert und ist daher ok.}
-																										& \ok	& \nok	& \ok	& \ok \\
-		7 & \footnotesize{Node.js 9.6.2}		& \ok	& \ok	& \ok 	& \ok	& \ok	& \ok	& \ok	& \ok	&  \ok	& \ok	& \ok	& \ok \\
+																													    & \ok	& \ok	& \ok \\
+		\footnotesize{4}
+		 & \footnotesize{Testausführung}		& \nok	& \ok	& \nok  & \ok	& \ok	& \ok	& 		&		&		& \nok	&		&		& \\
+		\footnotesize{5}
+		 &	\footnotesize{Windows 7}			& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok 	& \ok \\
+		\footnotesize{6}
+		 & \footnotesize{benötigte Software}	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok 	& \ok\footnote{Zur Ausführung wird zwar Selenium benötigt, dies wird aber automatisiert mitinstalliert und ist daher ok.}
+																										& \ok	& \nok	& \ok	& \ok 	& \ok \\
+		\footnotesize{7}
+		 & \footnotesize{Node.js 9.6.2}& \ok	& \ok	& \ok 	& \ok	& \ok	& \ok	& \ok	& \ok	&  \ok	& \ok	& \ok	& \ok	& \ok \\
 		
-		8 & \footnotesize{npm}					& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \nok	& \ok	& \ok	& \ok \\
-		9 & \footnotesize{Open Source \& kommerziell}
-										& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok \\
-		10 & \footnotesize{Wartung\footnote{Zur Auswertung dieser Anforderung wird das jeweilige Github-Repository herangezogen.}}
+		\footnotesize{8}
+		 & \footnotesize{npm}			& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \nok	& \ok	& \ok	& \ok	& \ok \\
+		\footnotesize{9}
+		 & \footnotesize{Open Source \& kommerziell}
+										& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok \\
+		\footnotesize{10}
+		 & \footnotesize{Wartung\footnote{Zur Auswertung dieser Anforderung wird das jeweilige Github-Repository herangezogen.}}
 										& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \nok\footnote{1.841 offene Issues; 2 Issues geschlossen in der letzten Woche\cite{phantomjs-issues,phantomjs-pulse}}
-																											& \ok	& \ok	& \ok \\ 
+																												& \ok	& \ok	& \ok	& \ok \\ 
 		%11 & \textbf{ECMA-262 5.1}		& 		& \ok	&		&		&		&		& \ok	&		&		&		&		& \\
-		11 & \footnotesize{Forcierte Beschreibung}
-										&		& \ok	& \nok	& \ok	& \ok	& \ok	& 		& 		&		& \ok	& 		& \\
-		12 & \footnotesize{BDD-Stil}	&		& \ok	& \nok	& \nok	& \ok	& \ok	& \ok	&		&		& \nok	&		& \\
-		13 & \footnotesize{Einarbeitung \& Verwendung}
+		\footnotesize{11}
+		 & \footnotesize{Forcierte Beschreibung}
+										&		& \ok	& \nok	& \ok	& \ok	& \ok	& 		& 		&		& \ok	& 		&		& \\
+		\footnotesize{12}
+			 & \footnotesize{BDD-Stil}	&		& \ok	& \nok	& \nok	& \ok	& \ok	& \ok	&		&		& \nok	&		& 		&\\
+		\footnotesize{13} 
+		& \footnotesize{Einarbeitung \& Verwendung}
 										& \ok	& \ok	& \ok	& \ok	& \nok\footnote{Warten auf asynchrone AngularJS-Komponenten muss bei End-To-End-Tests manuell implementiert werden.}
 																				& \ok	& \ok	& \ok	& \ok	& \nok\footnote{Warten auf asynchrone AngularJS-Komponenten muss manuell implementiert werden.}
-																												& \ok	& \ok \\
-		14 & \footnotesize{Flexibilität}& 		& \ok	& \nok	& \nok	& \ok	& \nok	& 		&		&		& \nok	&		& \\
-		15 & \footnotesize{Code-Coverage}		
-										& \ok	& \ok	& \ok	& \nok	& \ok	&		&		&		&		&		&		& \\ 
-		16 & \footnotesize{Ausgabe-Konfiguration}
-										& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	&		&		& 		& \nok	&		& \\
-		17 & \footnotesize{Screenshots}	&		&		&		&		& \nok	&		&		& \ok	& \ok	& \ok	&		& \\
-		18 & \footnotesize{Spies, Stubs, Mocks}
-										&		&		&		&		&		&		&		&		&		& 		& \ok	& \ok \\
-		19 & \footnotesize{keine proprietären Dateien}
-										& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok						
+																														& \ok	& \ok	& \ok \\
+		\footnotesize{14}
+		 & \footnotesize{Flexibilität}& 		& \ok	& \nok	& \nok	& \ok	& \nok	& 		&		&		& \nok	&		& 		& \\
+		\footnotesize{15}
+		 & \footnotesize{Code-Coverage}		
+										& 		& 		& 		& 		& \ok	&		&		&		&		&		&		& 		& \ok\\ 
+		\footnotesize{16}
+		 & \footnotesize{Ausgabe-Konfiguration}
+										& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	&		&		& 		& \nok	&		& 		& \ok \\
+		\footnotesize{17}
+		 & \footnotesize{Screenshots}	&		&		&		&		& \nok	&		&		& \ok	& \ok	& \ok	&		& 		&\\
+		\footnotesize{18}
+		 & \footnotesize{Spies, Stubs, Mocks}
+										&		&		&		&		&		&		&		&		&		& 		& \ok	& \ok	& \\
+		\footnotesize{19}
+		 & \footnotesize{keine proprietären Dateien}
+										& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok						
 	\end{tabularx}
 	\captionof{table}{Entscheidungsmatrix zur Softwareauswahl\label{tbl:entscheidungsmatrix}}
 	
-	Die Auswertung der Entscheidungsmatrix zeigt eine klare Softwareauswahl, mit welcher die Anforderungen vollständig abgedeckt werden können. Als Framework zur Testfallbeschreibung sowie als Testrunner wird Mocha eingesetzt, welches neben Intern von allen betrachteten Frameworks die höchste Flexibilität mit sich bringt. Die Kombination mit der Assertionbibliothek Chai, welche sich aus der Matrix ergibt, wird von \textcite{mocha-index} bereits in der Softwaredokumentation aufgeführt, wodurch hier von einem problemlosen Zusammenarbeiten auszugehen ist.
 	
-	Für die Realisierung von End-To-End-Tests wird auf das vom AngularJS-Team entwickelte Protractor zurückgegriffen und somit auch der Empfehlung aus der offiziellen AngularJS-Dokumentation \cite{angular-e2e} gefolgt. Die abweichende Kombination von Protractor mit Mocha und Chai, statt Jasmine, wird von vielen Entwicklern genutzt und unter Anderem in \cite{protractormocha-1} und \cite{protractormocha-2} beschrieben, so dass auch hier von keinen Problemen auszugehen ist.
-	
-	Für die Realisierung von Spies, Stubs und Mocks in Komponententests wird auf Sinon und ngMock gesetzt.
 %\end{table}
