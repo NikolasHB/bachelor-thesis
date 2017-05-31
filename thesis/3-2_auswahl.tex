@@ -4,7 +4,7 @@ An die auszuwählenden Frameworks oder Tools beziehungsweise eine Kombination Me
 	\item Es muss die Durchführung von Komponententests möglich sein.
 	\item Es muss die Durchführung von End-To-End-Tests möglich sein.
 	\item Es muss der Test von AngularJS-Anwendungen möglich sein.
-	\item Es soll die Testausführung von Komponententests via Node.js sowie im Browser möglich sein.
+	\item Es soll die Testausführung von Komponententests im Browser aus der Konsole heraus möglich sein.
 	\item Die Software muss unter Windows 7 funktionieren.
 	\item Es darf keine zusätzliche Software (beispielsweise Python) zur Ausführung erforderlich sein; lediglich Node.js ist zulässig, da dies über die Standardsoftwareverteilung der Commerzbank verfügbar ist\todo{quelle}.
 	\item Wenn die Software Node.js benötigt, muss sie mit Version 6.9.2 lauffähig sein.
@@ -32,7 +32,7 @@ Für die Entscheidungsfindung wird eine Entscheidungsmatrix (s. Tabelle \ref{tbl
 
 Zur Erfüllung von Anforderung 1 werden ein Testrunner, ein Framework zum Anlegen und Beschreiben der Testfälle sowie eine Assertion-Bibliothek benötigt; zur Erfüllung von Anforderung 2 zusätzlich ein Tool zur Browsersteuerung. Hierzu werden die gefundenen Softwares \todo{?} kategorisiert. Die endgültig ausgewählte Softwaremenge muss mindestens ein Exemplar jeder Kategorie enthalten, damit die Anforderungen 1 und 2 erfüllt werden.
 
-Die Auswertung der Entscheidungsmatrix (s. Tabelle \ref{tbl:entscheidungsmatrix} auf der Folgeseite) zeigt klar eine Softwareauswahl, mit welcher die Anforderungen vollständig abgedeckt werden können. Als Framework zur Testfallbeschreibung sowie als Testrunner wird Mocha eingesetzt, welches neben Intern von allen betrachteten Frameworks die höchste Flexibilität mit sich bringt. Die Kombination mit der Assertionbibliothek Chai, welche sich aus der Matrix ergibt, wird von \textcite{mocha-index} bereits in der Softwaredokumentation aufgeführt, wodurch hier von einem problemlosen Zusammenarbeiten auszugehen ist. Für die Ermittlung der Code-Coverage wird Istanbul eingesetzt; die Kombination des Einsatzes mit Mocha wird in \cite{istanbul} explizit empfohlen, so dass auch hier von keinerlei Problemen auszugehen ist.
+Die Auswertung der Entscheidungsmatrix (s. Tabelle \ref{tbl:entscheidungsmatrix} auf der Folgeseite) zeigt eine Softwareauswahl, mit welcher die Anforderungen vollständig abgedeckt werden können. Als Test-Runner wird Karma eingesetzt, welches die benötigten Dateien importiert und aus der Konsole heraus die in Mocha implementierten Tests ausführt. Die Kombination von Mocha mit der Assertionbibliothek Chai, welche sich aus der Matrix ergibt, wird von \textcite{mocha-index} bereits in der Softwaredokumentation aufgeführt, wodurch hier von einem problemlosen Zusammenarbeiten auszugehen ist. Für die Ermittlung der Code-Coverage wird Istanbul eingesetzt; die Kombination des Einsatzes mit Mocha wird in \cite{istanbul} explizit empfohlen, so dass auch hier von keinerlei Problemen auszugehen ist.
 
 Für die Realisierung von End-To-End-Tests wird auf das vom AngularJS-Team entwickelte Protractor zurückgegriffen und somit auch der Empfehlung aus der offiziellen AngularJS-Dokumentation \cite{angular-e2e} gefolgt. Die abweichende Kombination von Protractor mit Mocha und Chai, statt Jasmine, wird von vielen Entwicklern genutzt und unter Anderem in \cite{protractormocha-1} und \cite{protractormocha-2} beschrieben, so dass auch hier von keinen Problemen auszugehen ist.
 
@@ -60,7 +60,7 @@ Für die Realisierung von Spies, Stubs und Mocks in Komponententests wird auf Si
 																& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok
 																													    & \ok	& \ok	& \ok \\
 		\footnotesize{4}
-		 & \footnotesize{Testausführung}		& \nok	& \ok	& \nok  & \ok	& \ok	& \ok	& 		&		&		& \nok	&		&		& \\
+		 & \footnotesize{Testausführung}& \ok	& 		& 	  	& 		& 		& \ok	& 		&		&		& \nok	&		&		& \\
 		\footnotesize{5}
 		 &	\footnotesize{Windows 7}			& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok 	& \ok \\
 		\footnotesize{6}

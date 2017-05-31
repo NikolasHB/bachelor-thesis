@@ -1,6 +1,12 @@
 \section{Evaluierung}
-\subsection{Projektumfeld}
+Im folgenden Kapitel wird die getroffene Softwareauswahl evaluiert, indem für ein gegebenes, bereits existierendes AngularJS-Projekt im Commerzbank-Umfeld prototypisch Tests implementiert werden. Hierbei werden nicht Tests für alle Komponenten und Funktionalitäten der Anwendung entwickelt, sondern nur so viele, bis sich die getroffene Softwareauswahl als problemlos einzusetzen herausstellt.
+
+\subsection{Projektbeschreibung}
+Das Projekt GFB stellt ein digitales Formular bereit, mittels welchem Gefährdungsbeurteilungen erfasst werden können. Dies sind Dokumente, welche beispielsweise von Fachkräften für Arbeitssicherheit nach Betriebsbegehungen erstellt werden und in denen festgestellte Mängel aufgeführt werden.\cite{gfb}
+
+Die Anwendung ist eine Single-Page-Application und wurde unter Nutzung von AngularJS entwickelt. Bereitgestellt wird sie in einer Microsoft SharePoint-Umgebung, wodurch sich einige Besonderheiten ergeben: z.\,B. die Nutzung von SOAP zur Abfrage von WebServices. Hierdurch funktioniert die Anwendung auch ausschließlich im Internet Explorer und nicht im zweiten Commerzbank-Standardbrowser Firefox. Für die Anwendung existieren keine automatisierten Tests; jegliches Testen wird auf der Oberfläche im Testsystem durchgeführt.\cite{gfb}
 
 \subsection{Implementierung}
+Die Implementierung der Tests erfolgt in drei Iterationen: Zunächst wird eine Testumgebung, bestehend aus Karma, Mocha, Chai, Sinon und Istanbul, aufgesetzt und gezeigt, dass diese funktioniert. Anschließend werden prototypische Komponententests für alle verschiedenen Komponententypen (Controller, Service, Filter, Direktive) in AngularJS implementiert. Abschließend werden Systemtests als End-To-End-Tests umgesetzt; auch dies geschieht prototypisch und hat keine hundertprozentige Abdeckung zum Ziel.
 
 \subsection{Auswertung}
