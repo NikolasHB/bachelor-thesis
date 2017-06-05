@@ -9,4 +9,30 @@ Die Anwendung ist eine Single-Page-Application und wurde unter Nutzung von Angul
 \subsection{Implementierung}
 Die Implementierung der Tests erfolgt in drei Iterationen: Zunächst wird eine Testumgebung, bestehend aus Karma, Mocha, Chai, Sinon und Istanbul, aufgesetzt und gezeigt, dass diese funktioniert. Anschließend werden prototypische Komponententests für alle verschiedenen Komponententypen (Controller, Service, Filter, Direktive) in AngularJS implementiert. Abschließend werden Systemtests als End-To-End-Tests umgesetzt; auch dies geschieht prototypisch und hat keine hundertprozentige Abdeckung zum Ziel.
 
+\subsubsection{Testumgebung}
+Das bestehende Projekt konnte problemlos in ein npm-Projekt überführt werden. Alle existierenden Quelldateien wurden in einen Unterordner \texttt{src} verschoben und folgende Ordnerstruktur geschaffen:
+\begin{figure}[H]
+\dirtree{%
+	.1	/.
+	.2	coverage\DTcomment{Speicherort für Code-Coverage-Reports}.
+	.3	html.
+	.3	lcov.
+	.2	node\_modules\DTcomment{Speicherort für npm-Module}.
+	.2	src\DTcomment{Originaldateien der GFB-Anwendung}.
+	.2	test.
+	.3	spec.
+	}
+\end{figure}
+
+Über npm konnten alle für die Ausführung von Tests benötigten Komponenten installiert werden: Karma mitsamt diverser Plugins, Mocha, Chai, Istanbul, angular-mocks, Sinon und Protractor. Auch hierbei traten keinerlei Probleme auf. Die fertige \texttt{package.json}-Datei ist in Listing \ref{lst:gfb-package} im Anhang zu finden.
+
+Zur Verifizierung der Einsatzbereitschaft der installierten Software wurde eine einfache Testsuite geschrieben, welche eine Assertion durchführt und ein Spy mit Sinon erstellt. Für die Verifizierung von ngMock sowie die korrekte Einbindung aller originalen Projektdateien wurde eine weitere Testsuite erstellt, in welcher in zwei Testfällen ein Service und ein Filter, welche im Originalprojekt definiert sind, von ngMock injiziert werden. Die Testsuites finden sich in Listing \ref{lst:gfb-valid1} und \ref{lst:gfb-valid2} im Anhang. 
+
+Karma wurde so konfiguriert, dass es automatisch den Internet Explorer startet und diesen zur Ausführung der Tests verwendet. Hierbei trat das Problem auf, dass der Browser zwar gestartet wird, jedoch von Karma der erfolgreiche Start nicht korrekt erkannt wird. Laut Dokumentation des \texttt{karma-ie-launcher} führt Starten des Internet Explorers im \textit{no add-ons mode} zur Lösung dieses Problems\cite{karma-ie-launcher}. Nach Vornehmen dieser Änderung wird der Internet Explorer korrekt durch Karma gestartet und die Tests in ihm ausgeführt.
+
+Zur Ermittlung der Code-Coverage wurde das Plugin \texttt{karma-coverage} hinzugefügt, durch welches Karma das Code-Coverage-Tool Istanbul startet. Dieses wurde so konfiguriert, dass die erstellen Berichte über die Codeabdeckung im Unterordner \texttt{coverage} in zwei Formaten abgelegt werden. Zur manuellen Ansicht im Browser dient das HTML-Format, welches eine durchklickbare Seite bereitstellt, in welcher alle erforderlichen Statistiken angezeigt werden; beispielhafte Screenshots dieser Anzeige finden sich in Abbildung \ref{abb:code-cov-1} und \ref{abb:code-cov-2} im Anhang. 
+
+Die fertiggestellte Konfigurationsdatei für Karma ist in Listing \ref{lst:gfb-karma} im Anhang zu finden. Bei Ausführung des Befehls \texttt{karma start} treten keine Fehler auf; alle Testfälle werden als bestanden markiert. Es ist daher davon auszugehen, dass die eingerichtete Testumgebung für Komponententests funktioniert. 	
+
+\subsubsection{Komponententests}
 \subsection{Auswertung}

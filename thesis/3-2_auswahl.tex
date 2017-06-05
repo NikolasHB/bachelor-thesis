@@ -32,12 +32,6 @@ Für die Entscheidungsfindung wird eine Entscheidungsmatrix (s. Tabelle \ref{tbl
 
 Zur Erfüllung von Anforderung 1 werden ein Testrunner, ein Framework zum Anlegen und Beschreiben der Testfälle sowie eine Assertion-Bibliothek benötigt; zur Erfüllung von Anforderung 2 zusätzlich ein Tool zur Browsersteuerung. Hierzu werden die gefundenen Softwares \todo{?} kategorisiert. Die endgültig ausgewählte Softwaremenge muss mindestens ein Exemplar jeder Kategorie enthalten, damit die Anforderungen 1 und 2 erfüllt werden.
 
-Die Auswertung der Entscheidungsmatrix (s. Tabelle \ref{tbl:entscheidungsmatrix} auf der Folgeseite) zeigt eine Softwareauswahl, mit welcher die Anforderungen vollständig abgedeckt werden können. Als Test-Runner wird Karma eingesetzt, welches die benötigten Dateien importiert und aus der Konsole heraus die in Mocha implementierten Tests ausführt. Die Kombination von Mocha mit der Assertionbibliothek Chai, welche sich aus der Matrix ergibt, wird von \textcite{mocha-index} bereits in der Softwaredokumentation aufgeführt, wodurch hier von einem problemlosen Zusammenarbeiten auszugehen ist. Für die Ermittlung der Code-Coverage wird Istanbul eingesetzt; die Kombination des Einsatzes mit Mocha wird in \cite{istanbul} explizit empfohlen, so dass auch hier von keinerlei Problemen auszugehen ist.
-
-Für die Realisierung von End-To-End-Tests wird auf das vom AngularJS-Team entwickelte Protractor zurückgegriffen und somit auch der Empfehlung aus der offiziellen AngularJS-Dokumentation \cite{angular-e2e} gefolgt. Die abweichende Kombination von Protractor mit Mocha und Chai, statt Jasmine, wird von vielen Entwicklern genutzt und unter Anderem in \cite{protractormocha-1} und \cite{protractormocha-2} beschrieben, so dass auch hier von keinen Problemen auszugehen ist.
-
-Für die Realisierung von Spies, Stubs und Mocks in Komponententests wird auf Sinon und ngMock gesetzt.
-
 %\begin{table}[H] \centering
 	%\begin{tabular}{@{} cl*{11}c @{}}
 	%	& & \rot{Karma} & \rot{Mocha} & \rot{AVA} & \rot{QUnit} & \rot{Intern} & \rot{Jasmine} & \rot{Chai} & \rot{Protractor} & \rot{PhantomJS} & \rot{CasperJS} & \rot{Sinon} & \rot{ngMock} \\\hline
@@ -45,14 +39,16 @@ Für die Realisierung von Spies, Stubs und Mocks in Komponententests wird auf Si
 	%	
 	%\end{tabular}
 	\begin{tabularx}{\textwidth}{@{}r@{\hskip 6pt}X|ccccccccccccc}
-		&& \multicolumn{12}{c}{Software} \\ &&  \rot{Karma} & \rot{Mocha} & \rot{AVA} & \rot{QUnit} & \rot{Intern} & \rot{Jasmine} & \rot{Chai} & \rot{Protractor} & \rot{PhantomJS} & \rot{CasperJS} & \rot{Sinon} & \rot{ngMock} & \rot{Istanbul} \\ \hline
+		&& \multicolumn{12}{c}{Software} \\ &&  \rot{\footnotesize{Karma}} & \rot{\footnotesize{Mocha}} & \rot{\footnotesize{AVA}} & \rot{\footnotesize{QUnit}} & \rot{\footnotesize{Intern}} & \rot{\footnotesize{Jasmine}} & \rot{\footnotesize{Chai}} & \rot{\footnotesize{Protractor}} & \rot{\footnotesize{PhantomJS}} & \rot{\footnotesize{CasperJS}} & \rot{\footnotesize{Sinon}} & \rot{\footnotesize{ngMock}} & \rot{\footnotesize{Istanbul}} \\ \hline
 		%									Ka		Mo		Av		QU		In		Ja		Ch		Pr		Ph		Ca		Si		ng		Is
-	    &	\footnotesize{Testrunner}	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& 		& 		&		& \ok	&		&  		&\\
-	    &	\footnotesize{Testfallbeschreibung}
+	    \multirow{5}{*}{\centering\rot{\footnotesize{Kategorie}}}
+		&	\footnotesize{Testrunner}	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& 		& 		&		& \ok	&		&  		&\\
+	    &	\footnotesize{Testframework}
 							    		&		& \ok	& \ok	& \ok	& \ok	& \ok	&		&		&		& \ok	&		& 		&\\
 	    &	\footnotesize{End-To-End}	
 									    & 		&		&		&		& \ok	&		&		& \ok	& \ok	& \ok	&		&  		&\\
-	    &	\footnotesize{Assertion}	& 		&		& \ok	& \ok	& \ok	& \ok	& \ok	& 		& 		& \ok	& 		&  		&\\\hline\hline
+	    &	\footnotesize{Assertion}	& 		&		& \ok	& \ok	& \ok	& \ok	& \ok	& 		& 		& \ok	& 		&  		&\\
+	    &	\footnotesize{Sonstige}		&		&		&		&		&		&		&		&		&		&		& \ok	& \ok	& \ok \\\hline\hline
 	    
 	    \footnotesize{3}
 	     &	\footnotesize{AngularJS-Support}	
@@ -108,5 +104,11 @@ Für die Realisierung von Spies, Stubs und Mocks in Komponententests wird auf Si
 	\end{tabularx}
 	\captionof{table}{Entscheidungsmatrix zur Softwareauswahl\label{tbl:entscheidungsmatrix}}
 	
+	Die Auswertung der Entscheidungsmatrix zeigt, dass AVA, QUnit, Intern, Jasmine, PhantomJS sowie CasperJS nicht eingesetzt werden können, da sie Anforderungen widersprechen. Die Verbleibenden bilden die Basis für die zu treffende Auswahl aufgrund der Anforderungen. Es zeigt sich, dass nur durch den Einsatz aller verbleibender Software sämtliche Anforderungen abgedeckt werden können. Es wird somit folgende Auswahl getroffen:
 	
+	Als Test-Runner wird Karma eingesetzt, welches die benötigten JavaScript-Dateien importiert, bereitstellt und aus der Konsole heraus die in Mocha implementierten Tests ausführt. Die sich aus der Matrix ergebende Kombination von Mocha mit der Assertionbibliothek Chai wird von \textcite{mocha-index} bereits in der Softwaredokumentation aufgeführt, wodurch hier von einem problemlosen Zusammenarbeiten auszugehen ist. Für die Ermittlung der Code-Coverage wird Istanbul eingesetzt; die Kombination des Einsatzes mit Mocha wird in \cite{istanbul} explizit empfohlen, so dass auch hier von keinerlei Problemen auszugehen ist.
+	
+	Für die Realisierung von End-To-End-Tests wird auf das vom AngularJS-Team entwickelte Protractor zurückgegriffen und somit auch der Empfehlung aus der offiziellen AngularJS-Dokumentation \cite{angular-e2e} gefolgt. Die abweichende Kombination von Protractor mit Mocha und Chai, statt Jasmine, wird von vielen Entwicklern genutzt und unter Anderem in \cite{protractormocha-1} und \cite{protractormocha-2} beschrieben, so dass auch hier von keinen Problemen auszugehen ist.
+	
+	Für die Realisierung von Spies, Stubs und Mocks in Komponententests wird auf Sinon und ngMock gesetzt.
 %\end{table}
