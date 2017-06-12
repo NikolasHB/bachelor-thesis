@@ -1,5 +1,5 @@
 \subsubsection{Laufzeitumgebung}
-Node.js ist eine Laufzeitumgebung, mit der JavaScript ohne Webbrowser ausgeführt werden kann\cite[][1]{hughes2012einfuehrungnodejs}. Somit ist es möglich, JavaScript nicht nur für die Darstellung von Benutzeroberflächen im Webbrowser zu Nutzen, sondern auch als Backend-Sprache oder zur Unterstützung von Entwicklungsprozessen auf Continuous-Integration-Servern oder Entwicklerarbeitsplätzen.
+Node.js ist eine Laufzeitumgebung, mit der JavaScript serverseitig, also ohne Webbrowser, ausgeführt werden kann\cite[][1]{hughes2012einfuehrungnodejs}. Somit ist es möglich, JavaScript nicht nur für die Darstellung von Benutzeroberflächen im Webbrowser zu Nutzen, sondern auch als Backend-Sprache oder zur Unterstützung von Entwicklungsprozessen auf Continuous-Integration-Servern oder Entwicklerarbeitsplätzen.
 
 Intern nutzt Node.js die JavaScript-Engine \textit{Chrome V8} \cite{nodejs}, welche von Google als Open-Source-Software veröffentlicht wurde. V8 kommt auch im weitverbreiteten Webbrowser \textit{Google Chrome} zum Einsatz und implementiert den JavaScript-Standard ECMAScript wie in ECMA-262 spezifiziert\cite{chromev8}. ECMA-262 ist der im Juni 2016 veröffentlichte und zurzeit aktuellste JavaScript-Standard\cite{ecma262}. Somit bietet Node.js alle spezifizierten und von Google Chrome unterstützten Sprachfunktionalitäten. Es eignet sich daher auch für den Test von für Webbrowser entwickelte Webanwendungen.
 
@@ -21,7 +21,7 @@ Neben der Paketverwaltung kann npm auch zum Build als Taskrunner eingesetzt werd
 
 Angegebene Skripte können auch automatisch in sogenannten Hooks (\textit{Pre} und \textit{Post Hooks}) ausgeführt werden. Im Beispiel (siehe Listing \ref{lst:packageWithScripts-json}) sind folgende Hooks definiert:\cite{cirkel-npmAsABuildTool}
 \begin{itemize}
-	\item \glqq prepublish\grqq{} wird vor der Ausführung von \texttt{publish}, welches ein npm Standard-Skript ist und das Paket in der npm Registry veröffentlicht\cite{npm-publish}, das benutzerdefinierte Skript \texttt{build} sowie dadurch \texttt{prebuild} und \texttt{postbuild} ausführen.
+	\item \glqq prepublish\grqq{} wird vor der Ausführung von \texttt{publish}, welches ein npm Standard-Skript ist und das Paket in der npm Registry veröffentlicht\cite{npm-publish} und das benutzerdefinierte Skript \texttt{build} ausführt. Durch die Ausführung von \texttt{build} werden automatisch auch \texttt{prebuild} und \texttt{postbuild} ausgeführt.
 	\item \glqq prebuild\grqq{} wird vor Ausführung des \texttt{build}-Skripts das Paket durch Ausführung von \texttt{test} überprüfen.
 	\item \glqq pretest\grqq{} wird vor Ausführung von \texttt{test} mittels \texttt{lint} das Paket auf statische Fehler untersuchen.
 \end{itemize}

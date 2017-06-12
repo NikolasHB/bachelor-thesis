@@ -3,7 +3,7 @@ Einen Einstiegspunkt und ersten Überblick über zur Verfügung stehende Tools b
 
 \subsubsection{Karma}
 \label{sec:Karma}
-Karma ist ein Test-Runner für die Ausführung von JavaScript-Tests. Er wurde vom AngularJS-Team ins Leben gerufen und wird auf GitHub von einer Open-Source-Gemeinschaft weiterentwickelt.\cite{karma-index} Karma liegt als Paket \texttt{karma} im npm-Repository\cite{karma-faq}.
+Karma ist ein Testrunner. Er wurde vom AngularJS-Team ins Leben gerufen und wird auf GitHub von einer Open-Source-Gemeinschaft weiterentwickelt.\cite{karma-index} Karma liegt als Paket \texttt{karma} im npm-Repository\cite{karma-faq}.
 
 Karma selbst bietet jedoch keine Möglichkeit zur Implementierung von Testfällen und benötigt daher ein Testframework wie Jasmine (s. Abschnitt \ref{sec:Jasmine}), Mocha (s. Abschnitt \ref{sec:Mocha}) oder QUnit (s. Abschnitt \ref{sec:QUnit}). Auch Continuous Integration Server wie Jenkins oder Travis werden unterstützt.\cite{karma-faq}
 
@@ -19,7 +19,7 @@ Die Funktionalität von Karma lässt sich mit Plugins erweitern. Sie werden für
 
 \subsubsection{Mocha}
 \label{sec:Mocha}
-Mocha ist ein Testframework und Test-Runner, welches sowohl in Node.js als auch in Browsern lauffähig ist. Es liegt als Paket \texttt{mocha} im npm-Repository und kann darüber installiert werden.\cite{mocha-index}
+Mocha ist ein Testframework und Testrunner, welches sowohl in Node.js als auch in Browsern lauffähig ist. Es liegt als Paket \texttt{mocha} im npm-Repository und kann darüber installiert werden.\cite{mocha-index}
 
 Tests bestehen in Mocha aus drei Ebenen. Die Oberste sind die Testsuites, welche weitere Testsuites oder Testfälle enthalten können. Für jeden Testsuite und jeder Testfall muss ein Name vergeben werden, durch welchen der Test beschrieben wird. Testfälle bestehen aus funktionalem Code sowie Assertions als eigentliche Testüberprüfung. Es werden verschiedene Stile zur Testbeschreibung unterstützt: BDD, TDD, QUnit (s. Listing \ref{lst:qunit-test} in Abschnitt \ref{sec:QUnit}) und weitere, welche sich nur in ihrem Aussehen unterscheiden und Entwicklern ermöglichen, ihren eigenen Stil zur Definition von Tests zu wählen.\cite{mocha-index}
 
@@ -35,9 +35,9 @@ Mocha ermöglicht es, die Testausgabe beliebig zu konfigurieren, so dass beispie
 
 \subsubsection{AVA}
 \label{sec:Ava}
-AVA ist ein Test-Runner für in JavaScript geschriebene Tests. Die Besonderheit ist, dass die Tests simultan ausgeführt werden und somit deutliche Performanceverbesserungen möglich sind. Es steht unter \texttt{ava} im npm-Repository zur Verfügung.\cite{ava}
+AVA ist ein komplettes Test-Tool, also sowohl Testrunner, Testframework und beinhaltet eine Assertion-Bibliothek. Die Besonderheit ist, dass die Tests simultan ausgeführt werden und somit deutliche Performanceverbesserungen möglich sind. Es steht unter \texttt{ava} im npm-Repository zur Verfügung.\cite{ava}
 
-AVA läuft ausschließlich in Node.js; es gibt also keine Möglichkeit den Test-Runner im Browser aufzurufen. Ein Test wird über Aufruf einer Funktion, welche aus dem Node-Modul \textit{ava} importiert wird, definiert. Dieser Funktion wird ein Funktionskörper übergeben, welcher den Test spezifiert und Assertions durchführt. Ein Beispiel findet sich in Listing \ref{lst:ava}. Die Assertion-Funktionen werden über das übergebene Testobjekt \texttt{t} bereitgestellt. Es ist nicht vorgesehen andere Assertionframeworks zu nutzen. Mit den Funktionen \texttt{before}, \texttt{after}, \texttt{beforeEach} und \texttt{afterEach} können Funktionen definiert werden, welche vor oder nach jedem Test oder einmalig allen Tests ausgeführt werden.\cite{ava}
+AVA läuft ausschließlich in Node.js; es gibt also keine Möglichkeit den Testrunner im Browser aufzurufen. Es eignet sich somit nur bedingt für den Test von AngularJS, da hierfür meist ein DOM benötigt wird. Ein Test wird über Aufruf einer Funktion, welche aus dem Node-Modul \textit{ava} importiert wird, definiert. Dieser Funktion wird ein Funktionskörper übergeben, welcher den Test spezifiert und Assertions durchführt. Ein Beispiel findet sich in Listing \ref{lst:ava}. Die Assertion-Funktionen werden über das übergebene Testobjekt \texttt{t} bereitgestellt. Es ist nicht vorgesehen andere Assertion-Bibliotheken zu nutzen. Mit den Funktionen \texttt{before}, \texttt{after}, \texttt{beforeEach} und \texttt{afterEach} können Funktionen definiert werden, welche vor oder nach jedem Test oder einmalig allen Tests ausgeführt werden.\cite{ava}
 
 \begin{figure}[H]
 	\lstinputlisting[caption={Beispiel eines Tests mit AVA (adaptiert nach \cite{ava})}, label=lst:ava]{lst/ava.js}
@@ -45,7 +45,7 @@ AVA läuft ausschließlich in Node.js; es gibt also keine Möglichkeit den Test-
 
 \subsubsection{QUnit}
 \label{sec:QUnit}
-QUnit ist ein Framework für automatisierte Komponententests mit JavaScript und wird von jQuery und einer Vielzahl weiterer Projekten genutzt. Es liegt unter \texttt{qunitjs} als Paket im npm-Repository. Es kann sowohl in Browsern als auch in Node.js ausgeführt werden.\cite{qunit-index}
+QUnit ist ein Test-Tool für automatisierte Komponententests mit JavaScript und wird von jQuery und einer Vielzahl weiterer Projekten genutzt. Es beinhaltet somit Testrunner, Testframework und eine Assertion-Bibliothek. Es liegt unter \texttt{qunitjs} als Paket im npm-Repository. Es kann sowohl in Browsern als auch in Node.js ausgeführt werden.\cite{qunit-index}
 
 In QUnit geschriebene Tests ähneln denen vieler Testframeworks populärer anderer Sprachen, wie beispielsweise JUnit in Java. Ein Testfall wird mittels Aufruf von \texttt{QUnit.test(string, function)} definiert. In der übergebenen Funktion kann Testcode aufgerufen werden und das Ergebnis mit Assertions validiert werden. Wenn mindestens eine Assertion fehlschlägt, gilt der Test als fehlgeschlagen; sonst als bestanden. QUnit liefert Assertions mit: beispielsweise \texttt{assert.ok}, welche einen truthy Wert erwartet, oder \texttt{assert.equal}, welches zwei als gleich angesehene Werte erwartet.\cite{qunit-cookbook}
 
@@ -57,7 +57,7 @@ Tests können in durch Aufruf von \texttt{QUnit.module(string)} erzeugten Module
 
 \subsubsection{Intern}
 \label{sec:Intern}
-Intern ist ein Framework für automatisierte Tests in JavaScript. Es bietet sowohl Möglichkeiten für Komponenten- als auch für End-To-End-Tests. Intern ist flexibel und bietet dem Entwickler Möglichkeiten, seinen eigenen Stil zu verfolgen. Es steht als Paket \texttt{intern} über npm zur Verfügung.\cite{intern-userguide}
+Intern ist ein Tool für automatisierte Tests in JavaScript. Es bietet sowohl Möglichkeiten für Komponenten- als auch für End-To-End-Tests und besteht somit aus Testrunner, Testframework, Assertion-Bibliothek und einer Schnittstelle zur Browsersteuerung. Intern ist flexibel und bietet dem Entwickler Möglichkeiten, seinen eigenen Stil zu verfolgen. Es steht als Paket \texttt{intern} über npm zur Verfügung.\cite{intern-userguide}
 
 Intern stellt verschiedene Interfaces zur Definierung von Tests bereit; es können auch eigene definiert werden. Das \textit{Object}-Interface ist eine einzelne Funktion, welcher ein Objekt übergeben wird, welches alle definierten Tests enthält. In diesem Objekt werden außerdem Funktionen die vor oder nach jedem Test oder der Testsuite ausgeführt werden sollen definiert. Ein Beispiel findet sich in Listing \ref{lst:intern-object}.\cite{intern-userguide}
 
@@ -86,7 +86,7 @@ Intern ermittelt standardmäßig beim Ausführen von Tests die Code Coverage, al
 
 \subsubsection{Jasmine}
 \label{sec:Jasmine}
-Jasmine ist ein BDD-Testframework und Test-Runner\cite{jasmine-introduction}. Es liegt unter \texttt{jasmine} im npm-Repository\cite{jasmine-getting-started}. Jasmine bietet eine saubere und einfache Syntax zur Beschreibung von Testfällen. Die Tests bestehen aus drei Ebenen: Testsuites, Spezifizierungen (\glqq Specs\grqq) und Erwartungen, also den eigentlichen Testassertions\cite{jasmine-introduction}. Ein beispielhafter Test findet sich in Listing \ref{lst:jasmine-1}.
+Jasmine ist ein Testframework und Testrunner für Tests im BDD-Stil und beinhaltet eine Assertion-Bibliothek\cite{jasmine-introduction}. Es liegt unter \texttt{jasmine} im npm-Repository\cite{jasmine-getting-started}. Jasmine bietet eine saubere und einfache Syntax zur Beschreibung von Testfällen. Die Tests bestehen aus drei Ebenen: Testsuites, Spezifizierungen (\glqq Specs\grqq) und Erwartungen, also den eigentlichen Testassertions\cite{jasmine-introduction}. Ein beispielhafter Test findet sich in Listing \ref{lst:jasmine-1}.
 
 Eine Testsuite beginnt auf oberster Ebene mit dem Aufruf der globalen JavaScript-Funktion \texttt{describe}, wobei ein beschreibender String und eine Funktion zur Implementierung der Suite übergeben wird.\cite{jasmine-introduction}
 
@@ -112,7 +112,7 @@ Der BDD-Stil wird in zwei Varianten zur Verfügung gestellt: \texttt{expect} und
 
 \subsubsection{Protractor}
 \label{sec:Protractor}
-Protractor ist ein speziell für Angular-Anwendungen entwickeltes Framework für End-to-End-Tests. Die Tests werden in Browsern direkt gegen die Anwendungsoberfläche durchgeführt und simulieren somit das Verhalten eines echten Benutzers. Es liegt im npm-Repository mit der ID \texttt{protractor} und ist dadurch einfach zu installieren.\cite{protractor-index}
+Protractor ist ein speziell für Angular-Anwendungen entwickeltes Tool zur Browsersteuerung für End-to-End-Tests. Die Tests werden in Browsern direkt gegen die Anwendungsoberfläche durchgeführt und simulieren somit das Verhalten eines echten Benutzers. Es liegt im npm-Repository mit der ID \texttt{protractor} und ist dadurch einfach zu installieren.\cite{protractor-index}
 
 Protractor nutzt als Framework für die Testbeschreibung standardmäßig Jasmine (s. Abschnitt \ref{sec:Jasmine}), unterstützt out-of-the-box aber auch Mocha (s. Abschnitt \ref{sec:Mocha}). Die nachfolgenden Beispiele nutzen daher auch Jasmine. Das eingesetzte Testframework, die Adresse unter welcher der Selenium-Server angesprochen wird, Testdateien, Timeouts, für den Test zu verwendende Browser und weitere Feineinstellungen werden in einer Konfigurationsdatei (s. Listing \ref{lst:protractor-conf}) konfiguriert.
 
@@ -144,7 +144,7 @@ Für das Laden von Webseiten sind Page-Objekte zuständig, über welche eine URL
 
 \subsubsection{CasperJS}
 \label{sec:CasperJS}
-CasperJS ist ein Framework für Navigation und Test in PhantomJS. Es steht unter \texttt{casperjs} im npm-Repository zur Verfügung.\cite{casperjs-index} Trotz dessen ist es nicht unter Node.js lauffähig\cite{casperjs-faq}, sondern benötigt Python\cite{casperjs-installation}.
+CasperJS ist ein Framework für Navigation und Test in PhantomJS, und lässt sich somit als Tool zur Browsersteuerung kategorisieren. Es steht unter \texttt{casperjs} im npm-Repository zur Verfügung.\cite{casperjs-index} Trotz dessen ist es nicht unter Node.js lauffähig\cite{casperjs-faq}, sondern benötigt Python\cite{casperjs-installation}.
 
 Es ermöglicht die Erstellung von komplexen Navigationsszenarien unter Benutzung von High-Level-Funktionen. Hierzu werden u.\,a. die Funktionen \texttt{casper.start}, \texttt{casper.then}, \texttt{casper.thenOpen} und \texttt{casper.back} sequentiell aufgerufen. Das Szenario kann dann mittels \texttt{casper.run} aufgerufen werden und wird nacheinander abgearbeitet. Es stehen diverse Funktionen wie \texttt{casper.click}, \texttt{casper.fill} oder \texttt{casper.evaluate} zur DOM-Manipulation zur Verfügung. Für alle Browser-Operationen und DOM-Manipulationen wird als Browser PhantomJS genutzt, welcher von CasperJS gestartet wird. Die Ansteuerung von PhantomJS wird durch CasperJS vereinfacht, wodurch sich einfacher wartbarerer Code ergibt\cite{casperjs-better-phantomjs}. Ein beispielhaftes Navigationsszenario findet sich in Listing \ref{lst:casper-scenario}.\cite{casperjs-index}
 
