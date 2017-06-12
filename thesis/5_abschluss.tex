@@ -1,6 +1,18 @@
 \section{Ausblick}
-\subsection{Einsatz von automatisierten Test im Commerzbank-Konzern}
+\subsection{Einsatz von automatisierten Tests im Commerzbank-Konzern}
 
-\subsection{Mögliche Verbesserungen durch Einsatz von Angular2}
+
+\subsection{Mögliche Verbesserungen durch Einsatz von Angular statt AngularJS}
+Angular bietet im Vergleich zum älteren AngularJS einige Verbesserungen im Hinblick auf automatisierte Testbarkeit, welche in diesem Kapitel oberflächlich betrachtet werden sollen.
+
+Angular wird zusammen mit der Angular CLI ausgeliefert, einem Kommandozeilentool zur Vereinfachung verschiedener häufig benötigter Abläufe. Der integrierte Assistent zur Generierung der Grundstruktur neuer Angular-Projekte bindet in diese auch eine Unterstützung für automatisierte Tests ein: ein konfiguriertes Karma sowie passende Ordnerstrukturen. Dieses kann umkonfiguriert werden, so dass auch die Nutzung von Mocha und Chai, statt dem standardmäßigen Jasmine, möglich ist.\cite{ng2-cli}
+
+Es bietet die \textit{Angular Testing Utilities}, wobei es sich um Klassen und Funktionen handelt, welche die Testdurchführung erleichern. Sie ermöglichen es, ein \texttt{TestBed} zu erstellen, mit welchem ein Testmodul geschaffen wird, welches die zu testende Komponente enthält. Aus diesem Testmodul kann ein \texttt{TestFixture} kreiert werden, welches Zugriff auf die zu testene Komponente sowie auf das, der Komponente zugeordnete, DOM-Element bietet. Dies bietet im Vergleich zu Tests mit ngMock in AngularJS den Vorteil einer besseren Lesbarkeit und dem einfacheren Zugriff auf interne Funktionen und Eigenschaften. Ein beispielhafter Test unter Nutzung der Angular Testing Utilities findet sich in Listing \ref{lst:ng2-test}. \cite{ng2-test}
+
+Zusammenfassend lässt sich sagen, dass die Realisierung von automatisierten Tests in neueren Versionen von Angular mit weniger Problemen und deutlich einfacher möglich ist, so dass sich mögliche Anfangshindernisse und -schwellen verringern und so den Einstieg eines Entwicklers in automatisierte Tests erleichern. 
+
+\begin{figure}[H]
+	\lstinputlisting[caption={Beispielhafter Komponententest einer \textit{Component} in Angular; geschrieben in TypeScript (aus \cite{ng2-test})}, label=lst:ng2-test]{lst/ng2-test.js}
+\end{figure}
 
 \subsection{Fazit}
