@@ -11,11 +11,12 @@ module.exports = function (config) {
       'node_modules/angular-mocks/angular-mocks.js',
       'src/app.js',
       'src/ext/*.js',
+      'src/directives/*.js',
       'src/*.js',
       'test/spec/**/*_spec.js'
     ],
     exclude: ['src/ext/angularjs/angular-sanitize.min.js', 'src/gruppenlogik*.js'],
-    preprocessors: { 'src/ext/*.js': ['coverage'], 'src/*.js': ['coverage'] },
+    preprocessors: { 'src/ext/*.js': ['coverage'], 'src/*.js': ['coverage'], 'src/directives/*.js': ['coverage'] },
     reporters: ['mocha', 'coverage'],
     browsers: ['IE_no_addons'],
     concurrency: Infinity,
