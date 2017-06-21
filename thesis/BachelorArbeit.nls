@@ -3,26 +3,30 @@
  \nomgroup{A}
 
   \item [{BaFin}]\begingroup Bundesanstalt für Finanzdienstleistungsaufsicht\nomeqref {0}
-		\nompageref{26}
+		\nompageref{56}
   \item [{DOM}]\begingroup Document Object Model\nomeqref {0}
-		\nompageref{26}
+		\nompageref{56}
+  \item [{falsy}]\begingroup Ein in JavaScript als false angesehener Wert: false, 0, \glqq\grqq (leerer String), null, undefined und NaN\nomeqref {0}
+		\nompageref{56}
   \item [{HTTP}]\begingroup Hypertext Transfer Protocol\nomeqref {0}
-		\nompageref{26}
+		\nompageref{56}
   \item [{jQuery}]\begingroup jQuery ist eine JavaScript-Bibliothek für DOM-Manipulation, Event-Handling und Animation.\nomeqref {0}
-		\nompageref{26}
+		\nompageref{56}
   \item [{JSON}]\begingroup JavaScript Object Notation\nomeqref {0}
-		\nompageref{26}
+		\nompageref{56}
   \item [{Mock}]\begingroup Ein Platzhalter-Objekt, welches als Attrappe verwendet wird.\nomeqref {0}
-		\nompageref{26}
+		\nompageref{56}
   \item [{MVC}]\begingroup Model-View-Controller, ein Entwurfsmuster\nomeqref {0}
-		\nompageref{26}
+		\nompageref{56}
   \item [{MVVM}]\begingroup Model-View-ViewModel, ein Entwurfsmuster\nomeqref {0}
-		\nompageref{26}
+		\nompageref{56}
   \item [{REST}]\begingroup Representational State Transfer\nomeqref {0}
-		\nompageref{26}
+		\nompageref{56}
+  \item [{truthy}]\begingroup Ein in JavaScript als true angesehener Wert: alle nicht falsy Werte, auch \glqq 0\grqq, \glqq false\grqq{} oder leere Funktionen, Arrays, Objekte\nomeqref {0}
+		\nompageref{56}
   \item [{WebSocket}]\begingroup WebSocket ist eine bidirektionale Erweiterung von HTTP.\nomeqref {0}
-		\nompageref{26}
+		\nompageref{56}
   \item [{Whitebox-Test}]\begingroup Ein Whitebox-Test ist ein Test, welcher unter Kenntniss der inneren Funktionsweise entwickelt wird.\nomeqref {0}
-		\nompageref{26}
+		\nompageref{56}
 
 \end{thenomenclature}

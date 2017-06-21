@@ -1,30 +1,31 @@
 \subsection{Anforderungsanalyse}
 \label{sec:anforderungsanalyse}
-An die auszuwählenden Frameworks oder Tools beziehungsweise eine Kombination Mehrerer stellen sich folgende Anforderungen:
+An die auszuwählenden Frameworks oder Tools beziehungsweise eine Kombination Mehrerer stellen sich die folgenden Anforderungen:
 \begin{enumerate}[label=\textbf{A\arabic*}]
 	\item Es muss die Durchführung von Komponententests möglich sein.
 	\item Es muss die Durchführung von End-To-End-Tests möglich sein.
 	\item Es muss der Test von AngularJS-Anwendungen möglich sein.
-	\item Es soll die Testausführung von Komponententests im Browser aus der Konsole heraus möglich sein.
+	\item Es muss die Testausführung von Komponententests im Browser aus der Konsole heraus möglich sein.
 	\item Sie muss Open-Source und für den kommerziellen Einsatz freigegeben sein.
-	\item Sie soll aktiv gewartet und Fehler in ihr behoben werden; es soll eine aktive Open-Source-Community vorhanden sein.
+	\item Sie soll durch eine Open-Source-Community aktiv gewartet werden; Fehler in ihr sollen behoben werden.
 	%\item Es muss mindestens der aktuelle Commerzbank-Standard, ECMA-262 5.1, unterstützt werden\cite[][10]{coba-programmierrichtlinienJavaScript}.
 	\item Der Testcode soll leicht lesbar sein\cite[][7]{coba-programmierrichtlinienAllgemein}; hierzu bietet sich der BDD-Stil an, den das Testframework somit unterstützen soll.
 	\item Die Software soll eine geringe Einarbeitungszeit erfordern und problemlos zu verwenden sein. 
-	\item Sie soll dem Entwickler eine Flexibilität bei der Formulierung der Testfallimplementationen und Assertions bieten, damit dieser möglichst nah an seinen persönlichen Präferenzen arbeiten kann.
+	\item Sie soll dem Entwickler Flexibilität beim Schreibe der Testfallimplementationen und Assertions bieten, damit dieser möglichst nah an seinen persönlichen Präferenzen arbeiten kann.
 	\item Die Ausgabe der Testergebnisse muss konfigurierbar sein, um sie gegebenenfalls in Prozessen oder anderen Tools weiterverwenden zu können.
 	\item Bei der Durchführung von End-To-End-Tests soll es möglich sein, die Ergebnisse mit Screenshots zu dokumentieren.
 	\item Der Einsatz von Spies, Stubs und Mocks muss bei Unit-Tests möglich sein.
 \end{enumerate}
 
+\newpage
 Aufgrund diverser regulatorischer Vorgaben, Prozesse und vorhandener technischer Systeme innerhalb des Commerzbank-Konzerns ergeben sich weitere Anforderungen:
 \begin{enumerate}[label=\textbf{CB\arabic*}]
 	\item Die Software muss unter Windows 7 funktionieren.
-	\item Es darf keine zusätzliche Software (beispielsweise Python) zur Ausführung erforderlich sein; lediglich Node.js ist zulässig, da dies über die Standardsoftwareverteilung der Commerzbank verfügbar ist.
+	\item Es darf keine zusätzliche Software zur Ausführung erforderlich sein; lediglich Node.js und Java sind zulässig, da diese über die Standardsoftwareverteilung der Commerzbank verfügbar sind.
 	\item Wenn die Software Node.js benötigt, muss sie mit Version 6.9.2 lauffähig sein.
-	\item Die Software muss über npm installierbar sein.
+	\item Die Software muss über den Node Package Manager installierbar sein.
 	\item Gemäß dem SEF der Commerzbank müssen Testfälle eindeutig beschrieben werden; diese Beschreibung auch kann durch Implementierung der Tests erfolgen\cite{coba-sef}. Das Testframework soll daher eine Beschreibung der Tests forcieren.
-	\item Gemäß SEF sollen Komponententests \glqq einen möglichst großen Teil der Funktionalität abdecken\grqq{}\cite{coba-sef}. Zur Überprüfung dessen muss eine Möglichkeit zur Ermittlung der Code Coverage bestehen.
+	\item Gemäß dem SEF sollen Komponententests \glqq einen möglichst großen Teil der Funktionalität abdecken\grqq{}\cite{coba-sef}. Zur Überprüfung dessen muss eine Möglichkeit zur Ermittlung der Code Coverage bestehen.
 	\item Das Bearbeiten aller Dateien in der TFS-Quellcodeverwaltung soll möglich sein, es dürfen somit keine proprietären Binärdateien zum Einsatz kommen.
 \end{enumerate}
 
@@ -38,7 +39,7 @@ Zur Erfüllung der Anforderung A1 werden ein \textit{Testrunner}, ein \textit{Te
 \label{sec:auswahlentscheidung}
 Für die Entscheidungsfindung wird eine Entscheidungsmatrix (s. Tabelle \ref{tbl:entscheidungsmatrix}) erstellt, in welcher die Anforderungen gegen die gefundene Software abgeglichen werden. Ein grüner Haken steht für ein Erfüllen der Anforderung; ein rotes Kreuz für einen Widerspruch. Eine leere Zelle bedeutet, dass die Anforderung bei dieser Software nicht relevant ist, da sie weder positiv noch negativ beeinträchtigt wird. Eine Anforderung wird von der ausgewählten Softwaremenge erfüllt, wenn keine Einzelsoftware der Anforderung widerspricht.\todo{Formulierung!!!}
 
-Wie in Abschnitt \ref{sec:anforderungsanalyse} bereits beschrieben werden zur Erfüllung von Anforderung A1 ein Testrunner, ein Testframework sowie eine Assertion-Bibliothek benötigt; zur Erfüllung von Anforderung A2 zusätzlich ein Tool zur Browsersteuerung. Hierzu werden die gefundenen Softwares kategorisiert. Die endgültig ausgewählte Softwaremenge muss mindestens ein Exemplar jeder Kategorie enthalten, damit die Anforderungen A1 und A2 erfüllt werden.
+Wie in Abschnitt \ref{sec:anforderungsanalyse} bereits beschrieben werden zur Erfüllung von Anforderung A1 ein Testrunner, ein Testframework sowie eine Assertion-Bibliothek benötigt; zur Erfüllung von Anforderung A2 zusätzlich ein Tool zur Browsersteuerung. Hierzu werden die gefundenen Programme kategorisiert. Die endgültig ausgewählte Softwaremenge muss mindestens ein Exemplar jeder Kategorie enthalten, damit die Anforderungen A1 und A2 erfüllt werden.
 
 %\begin{table}[H] \centering
 	%\begin{tabular}{@{} cl*{11}c @{}}
@@ -71,7 +72,7 @@ Wie in Abschnitt \ref{sec:anforderungsanalyse} bereits beschrieben werden zur Er
 										& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok \\
 		\footnotesize{A6}
 		 & \footnotesize{Wartung\footnote{Zur Auswertung dieser Anforderung wird das jeweilige Github-Repository herangezogen.}}
-										& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \nok\footnote{1.841 offene Issues; 2 Issues geschlossen in der letzten Woche\cite{phantomjs-issues,phantomjs-pulse}}
+										& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \ok	& \nok\footnote{1.841 offene Issues; 2 Issues geschlossen in der letzten Woche \cite{phantomjs-issues,phantomjs-pulse}}
 																												& \ok	& \ok	& \ok	& \ok \\ 
 		%11 & \textbf{ECMA-262 5.1}		& 		& \ok	&		&		&		&		& \ok	&		&		&		&		& \\
 
@@ -115,11 +116,11 @@ Wie in Abschnitt \ref{sec:anforderungsanalyse} bereits beschrieben werden zur Er
 	\end{tabularx}
 	\captionof{table}{Entscheidungsmatrix zur Softwareauswahl\label{tbl:entscheidungsmatrix}}
 	
-	Die Auswertung der Entscheidungsmatrix zeigt, dass AVA, QUnit, Intern, Jasmine, PhantomJS sowie CasperJS nicht eingesetzt werden können, da sie Anforderungen widersprechen. Die Verbleibenden bilden die Basis für die zu treffende Auswahl aufgrund der Anforderungen. Es zeigt sich, dass nur durch den Einsatz aller verbleibender Software sämtliche Anforderungen abgedeckt werden können. Es wird somit folgende Auswahl getroffen:
+	Die Auswertung der Entscheidungsmatrix zeigt, dass AVA, QUnit, Intern, Jasmine, PhantomJS sowie CasperJS nicht eingesetzt werden können, da sie Anforderungen widersprechen. Die Verbleibenden bilden die Basis für die zu treffende Auswahl aufgrund der Anforderungen. Es zeigt sich, dass nur durch den Einsatz sämtlicher verbleibender Software sämtliche Anforderungen abgedeckt werden können. Es wird somit folgende Auswahl getroffen:
 	
-	Als Test-Runner wird Karma eingesetzt, welches die benötigten JavaScript-Dateien importiert, bereitstellt und aus der Konsole heraus die in Mocha implementierten Tests ausführt. Die sich aus der Matrix ergebende Kombination von Mocha mit der Assertionbibliothek Chai wird von \textcite{mocha-index} bereits in der Softwaredokumentation aufgeführt, wodurch hier von einem problemlosen Zusammenarbeiten auszugehen ist. Für die Ermittlung der Code-Coverage wird Istanbul eingesetzt; die Kombination des Einsatzes mit Mocha wird in \cite{istanbul} explizit empfohlen, so dass auch hier von keinerlei Problemen auszugehen ist.
+	Als Test-Runner wird Karma eingesetzt, welches die benötigten JavaScript-Dateien importiert, bereitstellt und aus der Konsole heraus die in Mocha implementierten Tests ausführt. Die sich aus der Matrix ergebende Kombination von Mocha mit der Assertionbibliothek Chai wird von \textcite{mocha-index} bereits in der Softwaredokumentation aufgeführt, wodurch hier von einem problemlosen Zusammenarbeiten auszugehen ist. Für die Ermittlung der Code-Coverage wird Istanbul eingesetzt; die Kombination des Einsatzes mit Mocha wird in  \cite{istanbul} explizit empfohlen, so dass auch hier von keinerlei Problemen auszugehen ist.
 	
-	Für die Realisierung von End-To-End-Tests wird auf das vom AngularJS-Team entwickelte Protractor zurückgegriffen und somit auch der Empfehlung aus der offiziellen AngularJS-Dokumentation \cite{angular-e2e} gefolgt. Die abweichende Kombination von Protractor mit Mocha und Chai, statt Jasmine, wird von vielen Entwicklern genutzt und unter Anderem in \cite{protractormocha-1} und \cite{protractormocha-2} beschrieben, so dass auch hier von keinen Problemen auszugehen ist.
+	Für die Realisierung von End-To-End-Tests wird auf das vom AngularJS-Team entwickelte Protractor zurückgegriffen und somit auch der Empfehlung aus der offiziellen AngularJS-Dokumentation  \cite{angular-e2e} gefolgt. Die abweichende Kombination von Protractor mit Mocha und Chai, statt Jasmine, wird von vielen Entwicklern genutzt und unter Anderem in  \cite{protractormocha-1} und  \cite{protractormocha-2} beschrieben, so dass auch hier von keinen Problemen auszugehen ist.
 	
 	Für die Realisierung von Spies, Stubs und Mocks in Komponententests wird auf Sinon und ngMock gesetzt.
 %\end{table}
