@@ -6,15 +6,15 @@ An die auszuwählenden Frameworks oder Tools beziehungsweise eine Kombination Me
 	\item Es muss die Durchführung von End-To-End-Tests möglich sein.
 	\item Es muss der Test von AngularJS-Anwendungen möglich sein.
 	\item Es muss die Testausführung von Komponententests im Browser aus der Konsole heraus möglich sein.
-	\item Sie muss Open-Source und für den kommerziellen Einsatz freigegeben sein.
+	\item Die Software muss Open-Source und für den kommerziellen Einsatz freigegeben sein.
 	\item Sie soll durch eine Open-Source-Community aktiv gewartet werden; Fehler in ihr sollen behoben werden.
 	%\item Es muss mindestens der aktuelle Commerzbank-Standard, ECMA-262 5.1, unterstützt werden\cite[][10]{coba-programmierrichtlinienJavaScript}.
-	\item Der Testcode soll leicht lesbar sein\cite[][7]{coba-programmierrichtlinienAllgemein}; hierzu bietet sich der BDD-Stil an, den das Testframework somit unterstützen soll.
+	\item Der Testcode soll leicht lesbar sein\cite[][7]{coba-programmierrichtlinienAllgemein}. Als Formulierungshilfe für Testfälle bietet sich der BDD-Stil an, den das Testframework somit unterstützen soll.
 	\item Die Software soll eine geringe Einarbeitungszeit erfordern und problemlos zu verwenden sein. 
-	\item Sie soll dem Entwickler Flexibilität beim Schreibe der Testfallimplementationen und Assertions bieten, damit dieser möglichst nah an seinen persönlichen Präferenzen arbeiten kann.
+	\item Sie soll dem Entwickler Flexibilität beim Schreiben der Testfallimplementationen und Assertions bieten, damit dieser möglichst nah an seinen persönlichen Präferenzen arbeiten kann.
 	\item Die Ausgabe der Testergebnisse muss konfigurierbar sein, um sie gegebenenfalls in Prozessen oder anderen Tools weiterverwenden zu können.
 	\item Bei der Durchführung von End-To-End-Tests soll es möglich sein, die Ergebnisse mit Screenshots zu dokumentieren.
-	\item Der Einsatz von Spies, Stubs und Mocks muss bei Unit-Tests möglich sein.
+	\item Der Einsatz von manipulierten und beobachtbaren Funktionen (Spies, Stubs, Mocks; s. auch Kapitel \ref{sec:Sinon}) muss bei Unit-Tests möglich sein.
 \end{enumerate}
 
 \newpage
@@ -24,8 +24,8 @@ Aufgrund diverser regulatorischer Vorgaben, Prozesse und vorhandener technischer
 	\item Es darf keine zusätzliche Software zur Ausführung erforderlich sein; lediglich Node.js und Java sind zulässig, da diese über die Standardsoftwareverteilung der Commerzbank verfügbar sind.
 	\item Wenn die Software Node.js benötigt, muss sie mit Version 6.9.2 lauffähig sein.
 	\item Die Software muss über den Node Package Manager installierbar sein.
-	\item Gemäß dem SEF der Commerzbank müssen Testfälle eindeutig beschrieben werden; diese Beschreibung auch kann durch Implementierung der Tests erfolgen\cite{coba-sef}. Das Testframework soll daher eine Beschreibung der Tests forcieren.
-	\item Gemäß dem SEF sollen Komponententests \glqq einen möglichst großen Teil der Funktionalität abdecken\grqq{}\cite{coba-sef}. Zur Überprüfung dessen muss eine Möglichkeit zur Ermittlung der Code Coverage bestehen.
+	\item Gemäß dem Software Engineering Framework der Commerzbank müssen Testfälle eindeutig beschrieben werden; diese Beschreibung auch kann durch Implementierung der Tests erfolgen\cite{coba-sef}. Das Testframework soll daher eine Beschreibung der Tests forcieren.
+	\item Gemäß dem Software Engineering Framework sollen Komponententests \glqq einen möglichst großen Teil der Funktionalität abdecken\grqq{}\cite{coba-sef}. Zur Überprüfung dessen muss eine Möglichkeit zur Ermittlung der Code Coverage bestehen.
 	\item Das Bearbeiten aller Dateien in der TFS-Quellcodeverwaltung soll möglich sein, es dürfen somit keine proprietären Binärdateien zum Einsatz kommen.
 \end{enumerate}
 
